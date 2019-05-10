@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TiRoundImageView">
+        <attr name="radius" format="dimension" />
+        <attr name="left_top_radius" format="dimension" />
+        <attr name="right_top_radius" format="dimension" />
+        <attr name="right_bottom_radius" format="dimension" />
+        <attr name="left_bottom_radius" format="dimension" />
+        <attr name="add_scale" format="float" />
+        <attr name="loading_icon" format="reference" />
+        <attr name="loading_icon_width" format="dimension" />
+        <attr name="loading_icon_height" format="dimension" />
+        <attr name="loading_icon_background_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TiFitScrollView">
+        <attr name="max_height" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TiWrapLayout">
+        <attr name="horizontal_spacing" format="dimension" />
+        <attr name="vertical_spacing" format="dimension" />
+        <attr name="gravity" format="enum">
+            <enum name="top" value="0" />
+            <enum name="center" value="1" />
+            <enum name="bottom" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TiWrapLayout_LayoutParams">
+        <attr name="layout_gravity" format="enum">
+            <enum name="top" value="0" />
+            <enum name="center" value="1" />
+            <enum name="bottom" value="2" />
+        </attr>
+    </declare-styleable>
+
+</resources>

@@ -1,17 +1,19 @@
 package com.endlesscreator.tibaselib.frame;
 
+import android.app.Application;
+
 /**
  * 必须初始化
  */
 public class TApp {
 
-    private static TiApp mApp;
+    private static Application mApp;
 
-    public static TiApp getInstance() {
+    public static Application getInstance() {
         return mApp;
     }
 
-    public static void onCreate(TiApp aApp) {
+    public static void onCreate(Application aApp) {
         mApp = aApp;
     }
 

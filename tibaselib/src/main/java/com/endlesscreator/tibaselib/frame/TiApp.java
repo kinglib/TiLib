@@ -4,7 +4,7 @@ import android.app.Application;
 
 public class TiApp extends Application {
 
-    public static TiApp getInstance() {
+    public static Application getInstance() {
         return TApp.getInstance();
     }
 
