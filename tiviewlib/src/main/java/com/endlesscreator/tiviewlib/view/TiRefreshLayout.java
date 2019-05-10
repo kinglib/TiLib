@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.constant.RefreshState;
 
 /**
  * 解决在调用 {@link SmartRefreshLayout#autoRefresh} 之后，立刻调用 {@link SmartRefreshLayout#finishRefresh} 不生效的问题
@@ -55,15 +56,23 @@ public class TiRefreshLayout extends SmartRefreshLayout {
         return super.finishLoadMore(delayed, success, noMoreData);
     }
 
-    @Override
     public boolean isRefreshing() {
-        return super.isRefreshing() || isWaitAutoRefreshing();
+        return getState() == RefreshState.Refreshing || isWaitAutoRefreshing();
     }
 
-    @Override
     public boolean isLoading() {
-        return super.isLoading() || getWaitAutoLoading();
+        return getState() == RefreshState.Loading || getWaitAutoLoading();
     }
+
+//    @Override
+//    public boolean isRefreshing() {
+//        return super.isRefreshing() || isWaitAutoRefreshing();
+//    }
+//
+//    @Override
+//    public boolean isLoading() {
+//        return super.isLoading() || getWaitAutoLoading();
+//    }
 
     public boolean isWaitAutoRefreshing() {
         return System.currentTimeMillis() - mAutoRefreshTimeMillis <= 1000;

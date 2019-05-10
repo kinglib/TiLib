@@ -19,6 +19,12 @@ android {
     }
 }
 
+
+repositories {
+    maven { url "https://dl.bintray.com/wty10001/kinglib/" }
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -28,9 +34,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 
-//    implementation 'com.endlesscreator.tibaselib:tibaselib:1.0.2'
-//    implementation 'com.endlesscreator.titoollib:titoollib:1.0.2'
-//    implementation 'com.endlesscreator.tiviewlib:tiviewlib:1.0.0'
+    implementation 'com.endlesscreator.tibaselib:tibaselib:1.0.3'
+    implementation 'com.endlesscreator.titoollib:titoollib:1.0.3'
+    implementation 'com.endlesscreator.tiviewlib:tiviewlib:1.0.1'
+
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
 
     // 支持Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
