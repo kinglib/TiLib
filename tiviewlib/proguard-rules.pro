@@ -19,3 +19,18 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# 保留内部类
+-keep class com.endlesscreator.tiviewlib.view.** { *; }
+
+# 保留自定义View构造
+-keep public class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+    public <init>(android.content.Context, android.util.AttributeSet, int, int);
+}
+
+# gif
+-keep public class pl.droidsonroids.gif.GifIOException{<init>(int);}
+-keep class pl.droidsonroids.gif.GifInfoHandle{<init>(long,int,int,int);}

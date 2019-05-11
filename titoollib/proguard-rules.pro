@@ -19,3 +19,14 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# picasso
+-dontwarn com.squareup.okhttp.**
+-keep public class com.squareup.okhttp.OkHttpClient
+-dontwarn com.squareup.picasso.**
+-keep class com.squareup.picasso.**
+
+# fastjson
+-keepattributes Signature
+-dontwarn com.alibaba.fastjson.**
+-keep class com.alibaba.fastjson.**{*; }
