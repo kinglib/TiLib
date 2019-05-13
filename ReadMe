@@ -3,6 +3,8 @@
 工程级allprojects中 或者 项目级与dependencies同级
 repositories {
     maven { url "https://dl.bintray.com/wty10001/kinglib/" }
+    // 如果需要用到ExpandableTextView才加下面这一行
+    maven { url 'https://jitpack.io' }
 }
 
 
@@ -51,6 +53,8 @@ dependencies {
 
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
+
+    implementation 'com.github.MZCretin:ExpandableTextView:v1.5.3'
 }
 
 

@@ -12,6 +12,8 @@ android {
 
 repositories {
     maven { url "https://dl.bintray.com/wty10001/kinglib/" }
+    // 下面这个ExpandableTextView要用
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -25,9 +27,12 @@ dependencies {
     // Gif图
     compileOnly 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
 
+    // 文字展开收起控件
+    compileOnly 'com.github.MZCretin:ExpandableTextView:v1.5.3'
+
     // 基础依赖基础库和工具库
     compileOnly 'com.endlesscreator.tibaselib:tibaselib:1.0.3'
-    compileOnly 'com.endlesscreator.titoollib:titoollib:1.0.3'
+    compileOnly 'com.endlesscreator.titoollib:titoollib:1.0.5'
 
 }
 
@@ -50,7 +55,7 @@ ext {
     artifact = 'tiviewlib'
     libraryDescription = 'UI库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.2'
+    libraryVersion = '1.0.3'
 
     //发布者的信息
     developerId = 'ty'
