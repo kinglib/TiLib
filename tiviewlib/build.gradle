@@ -30,6 +30,12 @@ dependencies {
     // 文字展开收起控件
     compileOnly 'com.github.MZCretin:ExpandableTextView:v1.5.3'
 
+    // 阿里的组合列表库
+    compileOnly('com.alibaba.android:vlayout:1.2.22@aar') {
+        transitive = true
+        exclude group: 'com.android.support' // 和 appcompat-v7、recyclerview-v7版本冲突，去除掉包内的
+    }
+
     // 基础依赖基础库和工具库
     compileOnly 'com.endlesscreator.tibaselib:tibaselib:1.0.3'
     compileOnly 'com.endlesscreator.titoollib:titoollib:1.0.5'
@@ -55,7 +61,7 @@ ext {
     artifact = 'tiviewlib'
     libraryDescription = 'UI库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.3'
+    libraryVersion = '1.0.4'
 
     //发布者的信息
     developerId = 'ty'

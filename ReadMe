@@ -55,6 +55,10 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
 
     implementation 'com.github.MZCretin:ExpandableTextView:v1.5.3'
+
+    implementation('com.alibaba.android:vlayout:1.2.22@aar') {
+        transitive = true
+    }
 }
 
 
