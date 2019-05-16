@@ -60,7 +60,7 @@ public class TiRoundLayout extends RelativeLayout {
         TypedArray lTypedArray = context.obtainStyledAttributes(attrs, R.styleable.TiRoundLayout);
         mStrokeColor = lTypedArray.getColor(R.styleable.TiRoundLayout_stroke_color, Color.TRANSPARENT);
         mStrokeWidth = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_stroke_width, 0);
-        mClipBackground = lTypedArray.getBoolean(R.styleable.TiRoundLayout_clip_bg, true);
+        mClipBackground = lTypedArray.getBoolean(R.styleable.TiRoundLayout_clip_bg, false);
         if (mRadius == 0) mRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_radius, 0);
 
         int lLeftTopRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_left_top_radius, mRadius);
