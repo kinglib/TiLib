@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 /**
  * 可支持禁止水平或竖直滚动，用于多RecyclerView的纵向或横向组合
  * <p>
- * 与 {@link android.support.v7.widget.RecyclerView} 或其子类配合使用，常用的子类如 {@link TiRecyclerView}
+ * 与 {@link android.support.v7.widget.RecyclerView} 或其子类配合使用，常用的子类如 {@link com.endlesscreator.tiviewlib.view.TiRecyclerView}
  * <p>
  */
 
