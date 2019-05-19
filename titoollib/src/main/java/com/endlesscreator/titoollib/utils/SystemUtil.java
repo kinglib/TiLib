@@ -7,6 +7,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.StrictMode;
@@ -305,6 +306,30 @@ public class SystemUtil {
         }
         return false;
     }
+
+//    //获取是否存在NavigationBar
+//    public static boolean hasNavigationBar() {
+//        boolean hasNavigationBar = false;
+//        try {
+//            Resources lResources = TApp.getInstance().getResources();
+//            int id = lResources.getIdentifier("config_showNavigationBar", "bool", "android");
+//            if (id > 0) {
+//                hasNavigationBar = lResources.getBoolean(id);
+//            }
+//            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+//            Method m = systemPropertiesClass.getMethod("get", String.class);
+//            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+//            if ("1".equals(navBarOverride)) {
+//                //不存在虚拟按键
+//                hasNavigationBar = false;
+//            } else if ("0".equals(navBarOverride)) {
+//                //存在虚拟按键
+//                hasNavigationBar = true;
+//            }
+//        } catch (Exception e) {
+//        }
+//        return hasNavigationBar;
+//    }
 
 
 //    public static void openApp(String aPackName) {

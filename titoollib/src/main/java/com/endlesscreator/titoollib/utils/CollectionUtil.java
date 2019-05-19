@@ -16,6 +16,10 @@ public class CollectionUtil {
         return null;
     }
 
+    public static <T> int getSize(List<T> aList) {
+        return aList != null ? aList.size() : 0;
+    }
+
     public static <K, T> int getItemsSize(Map<K, List<T>> aMap) {
         int lSize = 0;
         if (aMap != null && aMap.size() > 0) {
