@@ -468,6 +468,10 @@ public class TiExpandableTextView extends AppCompatTextView {
                         super.updateDrawState(ds);
                         ds.setColor(mExpandTextColor);
                         ds.setUnderlineText(false);
+
+                        if (expandOrContractClickListener instanceof OnExpandOrContractOperateListener) {
+                            ((OnExpandOrContractOperateListener) expandOrContractClickListener).onUpdateDrawStateListener(StatusType.STATUS_EXPAND, ds);
+                        }
                     }
                 }, ssb.length() - mExpandString.length() - expendLength, ssb.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
             } else {
@@ -520,6 +524,11 @@ public class TiExpandableTextView extends AppCompatTextView {
                             super.updateDrawState(ds);
                             ds.setColor(mContractTextColor);
                             ds.setUnderlineText(false);
+
+                            if (expandOrContractClickListener instanceof OnExpandOrContractOperateListener) {
+                                ((OnExpandOrContractOperateListener) expandOrContractClickListener).onUpdateDrawStateListener(StatusType.STATUS_CONTRACT, ds);
+                            }
+
                         }
                     }, ssb.length() - mContractString.length() - expendLength, ssb.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
                 } else {
@@ -644,6 +653,11 @@ public class TiExpandableTextView extends AppCompatTextView {
             public void updateDrawState(TextPaint ds) {
                 ds.setColor(mSelfTextColor);
                 ds.setUnderlineText(false);
+
+                if (linkClickListener instanceof OnLinkOperateListener) {
+                    ((OnLinkOperateListener) linkClickListener).onUpdateDrawStateListener(LinkType.SELF, data.getSelfAim(), data.getSelfContent(), ds);
+                }
+
             }
         }, data.getStart(), endPosition, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     }
@@ -668,6 +682,10 @@ public class TiExpandableTextView extends AppCompatTextView {
             public void updateDrawState(TextPaint ds) {
                 ds.setColor(mMentionTextColor);
                 ds.setUnderlineText(false);
+
+                if (linkClickListener instanceof OnLinkOperateListener) {
+                    ((OnLinkOperateListener) linkClickListener).onUpdateDrawStateListener(LinkType.MENTION_TYPE, data.getUrl(), null, ds);
+                }
             }
         }, data.getStart(), endPosition, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     }
@@ -700,6 +718,10 @@ public class TiExpandableTextView extends AppCompatTextView {
             public void updateDrawState(TextPaint ds) {
                 ds.setColor(mLinkTextColor);
                 ds.setUnderlineText(false);
+
+                if (linkClickListener instanceof OnLinkOperateListener) {
+                    ((OnLinkOperateListener) linkClickListener).onUpdateDrawStateListener(LinkType.LINK_TYPE, data.getUrl(), null, ds);
+                }
             }
         }, data.getStart() + 1, endPosition, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     }
@@ -981,10 +1003,19 @@ public class TiExpandableTextView extends AppCompatTextView {
 
     public interface OnLinkClickListener {
         void onLinkClickListener(LinkType type, String content, String selfContent);
+
+    }
+
+    public interface OnLinkOperateListener extends OnLinkClickListener {
+        void onUpdateDrawStateListener(LinkType type, String content, String selfContent, TextPaint ds);
     }
 
     public interface OnExpandOrContractClickListener {
         void onClick(StatusType type);
+    }
+
+    public interface OnExpandOrContractOperateListener extends OnExpandOrContractClickListener {
+        void onUpdateDrawStateListener(StatusType type, TextPaint ds);
     }
 
     public OnLinkClickListener getLinkClickListener() {

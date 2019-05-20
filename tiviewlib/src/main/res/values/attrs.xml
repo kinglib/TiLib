@@ -63,23 +63,42 @@
     </declare-styleable>
 
     <declare-styleable name="TiExpandableTextView">
+
+        <!--保留的行数-->
         <attr name="ep_max_line" format="integer" />
+
+        <!--是否需要展开，及其显示文字、颜色-->
         <attr name="ep_need_expand" format="boolean" />
-        <attr name="ep_need_contract" format="boolean" />
-        <attr name="ep_need_mention" format="boolean" />
-        <attr name="ep_need_link" format="boolean" />
-        <attr name="ep_need_animation" format="boolean" />
-        <attr name="ep_need_always_showright" format="boolean" />
-        <attr name="ep_need_self" format="boolean" />
-        <attr name="ep_contract_text" format="string" />
         <attr name="ep_expand_text" format="string" />
         <attr name="ep_expand_color" format="color" />
+
+        <!--是否需要收回，及其显示文字、颜色-->
+        <attr name="ep_need_contract" format="boolean" />
+        <attr name="ep_contract_text" format="string" />
         <attr name="ep_contract_color" format="color" />
-        <attr name="ep_end_color" format="color" />
+
+        <!--是否需要对链接进行处理，及其显示文字、颜色-->
+        <attr name="ep_need_link" format="boolean" />
         <attr name="ep_link_color" format="color" />
-        <attr name="ep_mention_color" format="color" />
-        <attr name="ep_self_color" format="color" />
         <attr name="ep_link_res" format="reference" />
+
+        <!--是否需要@用户，及其颜色-->
+        <attr name="ep_need_mention" format="boolean" />
+        <attr name="ep_mention_color" format="color" />
+
+        <!--是否需要展开和收回的动画-->
+        <attr name="ep_need_animation" format="boolean" />
+
+        <!--是否需要永远将展开或者收回放置在最后边-->
+        <attr name="ep_need_always_showright" format="boolean" />
+
+        <!--是否需要自定义规则，及其颜色-->
+        <attr name="ep_need_self" format="boolean" />
+        <attr name="ep_self_color" format="color" />
+
+        <!-- 在收回和展开前面添加的内容的字体颜色 -->
+        <attr name="ep_end_color" format="color" />
+
     </declare-styleable>
 
 </resources>
