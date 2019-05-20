@@ -81,16 +81,12 @@
         <attr name="ep_need_link" format="boolean" />
         <attr name="ep_link_color" format="color" />
         <attr name="ep_link_res" format="reference" />
+        <!--是否需要将连接转换成网页链接显示 默认为true-->
+        <attr name="ep_need_convert_url" format="boolean" />
 
         <!--是否需要@用户，及其颜色-->
         <attr name="ep_need_mention" format="boolean" />
         <attr name="ep_mention_color" format="color" />
-
-        <!--是否需要展开和收回的动画-->
-        <attr name="ep_need_animation" format="boolean" />
-
-        <!--是否需要永远将展开或者收回放置在最后边-->
-        <attr name="ep_need_always_showright" format="boolean" />
 
         <!--是否需要自定义规则，及其颜色-->
         <attr name="ep_need_self" format="boolean" />
@@ -98,6 +94,12 @@
 
         <!-- 在收回和展开前面添加的内容的字体颜色 -->
         <attr name="ep_end_color" format="color" />
+
+        <!--是否需要展开和收回的动画-->
+        <attr name="ep_need_animation" format="boolean" />
+
+        <!--是否需要永远将展开或者收回放置在最后边-->
+        <attr name="ep_need_always_showright" format="boolean" />
 
     </declare-styleable>
 

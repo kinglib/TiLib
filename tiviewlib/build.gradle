@@ -27,9 +27,6 @@ dependencies {
     // Gif图
     compileOnly 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
 
-    // 文字展开收起控件
-//    compileOnly 'com.github.MZCretin:ExpandableTextView:v1.5.3'
-
     // 阿里的组合列表库
     compileOnly('com.alibaba.android:vlayout:1.2.22@aar') {
         transitive = true
@@ -63,7 +60,7 @@ ext {
     artifact = 'tiviewlib'
     libraryDescription = 'UI库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.14'
+    libraryVersion = '1.0.15'
 
     //发布者的信息
     developerId = 'ty'
