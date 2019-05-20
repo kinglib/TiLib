@@ -38,8 +38,8 @@ dependencies {
 dependencies {
     ...
     implementation 'com.endlesscreator.tibaselib:tibaselib:1.0.3'
-    implementation 'com.endlesscreator.titoollib:titoollib:1.0.3'
-    implementation 'com.endlesscreator.tiviewlib:tiviewlib:1.0.1'
+    implementation 'com.endlesscreator.titoollib:titoollib:1.0.7'
+    implementation 'com.endlesscreator.tiviewlib:tiviewlib:1.0.15'
 }
 
 3.1, 如果用到其他相关类库，需要对应引入，如：
@@ -53,8 +53,6 @@ dependencies {
 
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
-
-    implementation 'com.github.MZCretin:ExpandableTextView:v1.5.3'
 
     implementation('com.alibaba.android:vlayout:1.2.22@aar') {
         transitive = true
