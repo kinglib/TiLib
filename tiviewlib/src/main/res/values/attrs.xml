@@ -62,7 +62,7 @@
         <attr name="scroll_enable" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="ExpandableTextView">
+    <declare-styleable name="TiExpandableTextView">
         <attr name="ep_max_line" format="integer" />
         <attr name="ep_need_expand" format="boolean" />
         <attr name="ep_need_contract" format="boolean" />
