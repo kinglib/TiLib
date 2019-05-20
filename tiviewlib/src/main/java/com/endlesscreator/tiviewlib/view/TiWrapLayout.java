@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.endlesscreator.tiviewlib.R;
-import com.endlesscreator.tiviewlib.view.model.Compat;
+import com.endlesscreator.tiviewlib.view.model.tiwraplayout.Compat;
 
 import java.util.ArrayList;
 

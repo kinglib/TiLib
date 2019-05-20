@@ -1,4 +1,4 @@
-package com.endlesscreator.tiviewlib.view.model;
+package com.endlesscreator.tiviewlib.view.model.tirecyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;

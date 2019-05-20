@@ -11,7 +11,7 @@ import android.view.ViewParent;
 
 import com.endlesscreator.tibaselib.frame.SingleManager;
 import com.endlesscreator.titoollib.utils.AlgorithmUtil;
-import com.endlesscreator.tiviewlib.view.model.ScrollEnabledGridLayoutManager;
+import com.endlesscreator.tiviewlib.view.model.tirecyclerview.ScrollEnabledGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;

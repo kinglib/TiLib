@@ -1,4 +1,4 @@
-package com.endlesscreator.tiviewlib.view.model;
+package com.endlesscreator.tiviewlib.view.model.vlayout;
 
 import android.util.Pair;
 
@@ -70,36 +70,4 @@ public class TiDelegateAdapter extends DelegateAdapter {
                     '}';
         }
     }
-
-//    public void f1(int position) {
-//        Pair<AdapterDataObserver, Adapter> adapterByPosition = findAdapterByPosition(position);
-//        System.out.println("------>>> adapterByPosition= " + adapterByPosition);
-//        if (adapterByPosition != null) {
-//
-//            AdapterDataObserver first = adapterByPosition.first;
-//
-//            // 第几个Adapter
-//            int index = first.getIndex();
-//
-//            // 当前adapter的头一个元素是全数据中的第几个位置
-//            int startPosition = first.getStartPosition();
-//
-//            // 在内部是第几个位置
-//            int innerPosition = position - startPosition;
-//
-//
-//            InfoUtil.INSTANCE.show("position = " + position + ", adapter index = " + index + ", startPosition = " + startPosition + ", innerPosition = " + innerPosition);
-//
-//
-////            System.out.println("------>>> adapterByPosition.first.getIndex()= " +  adapterByPosition.first.getIndex());
-////            System.out.println("------>>> adapterByPosition.first.getStartPosition()= " +  adapterByPosition.first.getStartPosition());
-////
-////            System.out.println("------>>> adapterByPosition.second= " +  adapterByPosition.second);
-////            System.out.println("------>>> adapterByPosition.second.getItemCount()= " +  adapterByPosition.second.getItemCount());
-//
-//
-//        }
-//
-//
-//    }
 }

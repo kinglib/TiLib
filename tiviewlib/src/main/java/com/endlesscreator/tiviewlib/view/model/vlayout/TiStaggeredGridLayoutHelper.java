@@ -1,4 +1,4 @@
-package com.endlesscreator.tiviewlib.view.model;
+package com.endlesscreator.tiviewlib.view.model.vlayout;
 
 import com.alibaba.android.vlayout.LayoutManagerHelper;
 import com.alibaba.android.vlayout.layout.StaggeredGridLayoutHelper;
