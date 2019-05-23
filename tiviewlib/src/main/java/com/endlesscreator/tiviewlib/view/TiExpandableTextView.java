@@ -1112,6 +1112,9 @@ public class TiExpandableTextView extends AppCompatTextView {
 
     public void setEpMaxLine(int aMaxLine, boolean aNowRefresh) {
         mLimitLines = aMaxLine;
+        if (mLimitLines <= 0) {
+            mLimitLines = DEF_MAX_LINE;
+        }
         if (aNowRefresh) setContent(Util.toString(mContent));
     }
 
