@@ -51,7 +51,9 @@ import static android.support.v4.util.PatternsCompat.AUTOLINK_WEB_URL;
  * 一个支持展开 收起 网页链接 和 @用户 点击识别 的TextView
  * 基于：
  * 原创来自：
- * compileOnly 'com.github.MZCretin:ExpandableTextView:v1.6.0'
+ * compileOnly 'com.github.MZCretin:ExpandableTextView:v1.5.3'
+ * 部分来自：
+ * compileOnly 'com.github.MZCretin:ExpandableTextView:v1.6.0' (此版本有bug，会将很多字符转换，导致内容不能正常展示)
  * 添加扩展：
  */
 public class TiExpandableTextView extends AppCompatTextView {
@@ -128,7 +130,7 @@ public class TiExpandableTextView extends AppCompatTextView {
     /**
      * 是否需要转换url成网页链接四个字
      */
-    private boolean mNeedConvertUrl = true;
+//    private boolean mNeedConvertUrl = true;
 
     /**
      * 是否需要@用户的功能
@@ -251,7 +253,7 @@ public class TiExpandableTextView extends AppCompatTextView {
             mNeedMention = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_mention, true);
             mNeedLink = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_link, true);
             mNeedAlwaysShowRight = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_always_showright, false);
-            mNeedConvertUrl = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_convert_url, true);
+//            mNeedConvertUrl = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_convert_url, true);
             mContractString = a.getString(R.styleable.TiExpandableTextView_ep_contract_text);
             mExpandString = a.getString(R.styleable.TiExpandableTextView_ep_expand_text);
             if (TextUtils.isEmpty(mExpandString)) {
@@ -837,7 +839,7 @@ public class TiExpandableTextView extends AppCompatTextView {
         int start = 0;
         int end = 0;
         int temp = 0;
-        Map<String, String> convert = new HashMap<>();
+//        Map<String, String> convert = new HashMap<>();
         //对自定义的进行正则匹配
         if (mNeedSelf) {
             List<FormatData.PositionData> datasMention = new ArrayList<>();
@@ -851,10 +853,11 @@ public class TiExpandableTextView extends AppCompatTextView {
                     //解析数据
                     String aimSrt = result.substring(result.indexOf("[") + 1, result.indexOf("]"));
                     String contentSrt = result.substring(result.indexOf("(") + 1, result.indexOf(")"));
-                    String key = UUIDUtils.getUuid(aimSrt.length());
+//                    String key = UUIDUtils.getUuid(aimSrt.length());
                     datasMention.add(new FormatData.PositionData(newResult.length() + 1, newResult.length() + 2 + aimSrt.length(), aimSrt, contentSrt, LinkType.SELF));
-                    convert.put(key, aimSrt);
-                    newResult.append(" " + key + " ");
+//                    convert.put(key, aimSrt);
+//                    newResult.append(" " + key + " ");
+                    newResult.append(" " + aimSrt + " ");
                     temp = end;
                 }
             }
@@ -875,17 +878,17 @@ public class TiExpandableTextView extends AppCompatTextView {
                 start = matcher.start();
                 end = matcher.end();
                 newResult.append(content.toString().substring(temp, start));
-                if (mNeedConvertUrl) {
+//                if (mNeedConvertUrl) {
                     //将匹配到的内容进行统计处理
                     datas.add(new FormatData.PositionData(newResult.length() + 1, newResult.length() + 2 + TARGET.length(), matcher.group(), LinkType.LINK_TYPE));
                     newResult.append(" " + TARGET + " ");
-                } else {
-                    String result = matcher.group();
-                    String key = UUIDUtils.getUuid(result.length());
-                    datas.add(new FormatData.PositionData(newResult.length(), newResult.length() + 2 + key.length(), result, LinkType.LINK_TYPE));
-                    convert.put(key, result);
-                    newResult.append(" " + key + " ");
-                }
+//                } else {
+//                    String result = matcher.group();
+//                    String key = UUIDUtils.getUuid(result.length());
+//                    datas.add(new FormatData.PositionData(newResult.length(), newResult.length() + 2 + key.length(), result, LinkType.LINK_TYPE));
+//                    convert.put(key, result);
+//                    newResult.append(" " + key + " ");
+//                }
                 temp = end;
             }
         }
@@ -901,13 +904,13 @@ public class TiExpandableTextView extends AppCompatTextView {
             }
             datas.addAll(0, datasMention);
         }
-        if (!convert.isEmpty()) {
-            String resultData = newResult.toString();
-            for (Map.Entry<String, String> entry : convert.entrySet()) {
-                resultData = resultData.replaceAll(entry.getKey(), entry.getValue());
-            }
-            newResult = new StringBuffer(resultData);
-        }
+//        if (!convert.isEmpty()) {
+//            String resultData = newResult.toString();
+//            for (Map.Entry<String, String> entry : convert.entrySet()) {
+//                resultData = resultData.replaceAll(entry.getKey(), entry.getValue());
+//            }
+//            newResult = new StringBuffer(resultData);
+//        }
         formatData.setFormatedContent(newResult.toString());
         formatData.setPositionDatas(datas);
         return formatData;

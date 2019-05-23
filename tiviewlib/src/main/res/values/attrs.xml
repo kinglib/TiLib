@@ -82,7 +82,7 @@
         <attr name="ep_link_color" format="color" />
         <attr name="ep_link_res" format="reference" />
         <!--是否需要将连接转换成网页链接显示 默认为true-->
-        <attr name="ep_need_convert_url" format="boolean" />
+        <!--<attr name="ep_need_convert_url" format="boolean" />-->
 
         <!--是否需要@用户，及其颜色-->
         <attr name="ep_need_mention" format="boolean" />
