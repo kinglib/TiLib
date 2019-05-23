@@ -29,6 +29,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.endlesscreator.titoollib.utils.Util;
 import com.endlesscreator.tiviewlib.R;
 import com.endlesscreator.tiviewlib.view.model.tiexpandabletextview.app.LinkType;
 import com.endlesscreator.tiviewlib.view.model.tiexpandabletextview.app.StatusType;
@@ -1103,6 +1104,23 @@ public class TiExpandableTextView extends AppCompatTextView {
 
     public void setNeedExpend(boolean mNeedExpend) {
         this.mNeedExpend = mNeedExpend;
+    }
+
+    public void setEpMaxLine(int aMaxLine) {
+        setEpMaxLine(aMaxLine, false);
+    }
+
+    public void setEpMaxLine(int aMaxLine, boolean aNowRefresh) {
+        mLimitLines = aMaxLine;
+        if (aNowRefresh) setContent(Util.toString(mContent));
+    }
+
+    public int getLimitLines() {
+        return mLimitLines;
+    }
+
+    public CharSequence getContent() {
+        return mContent;
     }
 
     public boolean isNeedAnimation() {

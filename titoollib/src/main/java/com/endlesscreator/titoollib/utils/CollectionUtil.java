@@ -32,4 +32,20 @@ public class CollectionUtil {
         return lSize;
     }
 
+    public static <T> String join(CharSequence aDelimiter, List<T> aDataList) {
+        StringBuilder lSB = new StringBuilder();
+        if (aDataList != null) {
+            int lSize = aDataList.size();
+            for (int i = 0; i < lSize - 1; i++) {
+                lSB.append(aDataList.get(i)).append(aDelimiter);
+            }
+            lSB.append(aDataList.get(lSize - 1));
+        }
+        return lSB.toString();
+    }
+
+    public static <T> String join(List<T> aDataList) {
+        return join(",", aDataList);
+    }
+
 }

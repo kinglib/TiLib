@@ -61,3 +61,10 @@ dependencies {
 
 
 4，项目的Application需要继承TiApp或者给TApp初始化
+
+
+
+5, 其他：
+Json解析序列化：
+Gson:  @SerializedName("")
+Fastjson: @JSONField(name = "")
