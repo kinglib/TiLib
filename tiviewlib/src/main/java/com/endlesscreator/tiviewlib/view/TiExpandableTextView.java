@@ -148,9 +148,14 @@ public class TiExpandableTextView extends AppCompatTextView {
     private boolean mNeedSelf = false;
 
     /**
-     * 是否需要永远将展开或收回显示在最右边
+     * 是否需要永远将展开显示在最右边
      */
-    private boolean mNeedAlwaysShowRight = false;
+    private boolean mNeedExpendAlwaysShowRight = false;
+
+    /**
+     * 是否需要永远将收回显示在最右边
+     */
+    private boolean mNeedContractAlwaysShowRight = false;
 
     /**
      * 是否需要动画 默认开启动画
@@ -252,7 +257,8 @@ public class TiExpandableTextView extends AppCompatTextView {
             mNeedSelf = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_self, false);
             mNeedMention = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_mention, true);
             mNeedLink = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_link, true);
-            mNeedAlwaysShowRight = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_always_showright, false);
+            mNeedExpendAlwaysShowRight = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_expand_always_show_right, false);
+            mNeedContractAlwaysShowRight = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_contract_always_show_right, false);
 //            mNeedConvertUrl = a.getBoolean(R.styleable.TiExpandableTextView_ep_need_convert_url, true);
             mContractString = a.getString(R.styleable.TiExpandableTextView_ep_contract_text);
             mExpandString = a.getString(R.styleable.TiExpandableTextView_ep_expand_text);
@@ -385,10 +391,10 @@ public class TiExpandableTextView extends AppCompatTextView {
      */
     private String getHideEndContent() {
         if (TextUtils.isEmpty(mEndExpandContent)) {
-            return String.format(Locale.getDefault(), mNeedAlwaysShowRight ? "  %s" : "...  %s",
+            return String.format(Locale.getDefault(), mNeedExpendAlwaysShowRight ? "  %s" : "...  %s",
                     mExpandString);
         } else {
-            return String.format(Locale.getDefault(), mNeedAlwaysShowRight ? "  %s  %s" : "...  %s  %s",
+            return String.format(Locale.getDefault(), mNeedExpendAlwaysShowRight ? "  %s  %s" : "...  %s  %s",
                     mEndExpandContent, mExpandString);
         }
     }
@@ -431,7 +437,7 @@ public class TiExpandableTextView extends AppCompatTextView {
                 String endString = getHideEndContent();
 
 
-                if (mNeedAlwaysShowRight) {
+                if (mNeedExpendAlwaysShowRight) {
 
                     //计算一下最后一行有没有充满
                     float lastLineWidth = lineWidth;
@@ -521,7 +527,7 @@ public class TiExpandableTextView extends AppCompatTextView {
                 if (mNeedContract) {
                     String endString = getExpandEndContent();
 
-                    if (mNeedAlwaysShowRight) {
+                    if (mNeedContractAlwaysShowRight) {
                         //计算一下最后一行有没有充满
                         int index = mDynamicLayout.getLineCount() - 1;
                         float lineWidth = mDynamicLayout.getLineWidth(index); // 最后一行文字的原始宽度
@@ -1251,12 +1257,20 @@ public class TiExpandableTextView extends AppCompatTextView {
         this.mNeedSelf = mNeedSelf;
     }
 
-    public boolean isNeedAlwaysShowRight() {
-        return mNeedAlwaysShowRight;
+    public boolean isNeedExpendAlwaysShowRight() {
+        return mNeedExpendAlwaysShowRight;
     }
 
-    public void setNeedAlwaysShowRight(boolean mNeedAlwaysShowRight) {
-        this.mNeedAlwaysShowRight = mNeedAlwaysShowRight;
+    public void setNeedExpendAlwaysShowRight(boolean aNeedExpendAlwaysShowRight) {
+        mNeedExpendAlwaysShowRight = aNeedExpendAlwaysShowRight;
+    }
+
+    public boolean isNeedContractAlwaysShowRight() {
+        return mNeedContractAlwaysShowRight;
+    }
+
+    public void setNeedContractAlwaysShowRight(boolean aNeedContractAlwaysShowRight) {
+        mNeedContractAlwaysShowRight = aNeedContractAlwaysShowRight;
     }
 
     public OnExpandOrContractClickListener getExpandOrContractClickListener() {
