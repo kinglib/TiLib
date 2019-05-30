@@ -34,6 +34,14 @@ public class TiAdapterListProxy<T> {
         mAdapter = aAdapter;
     }
 
+    public boolean setData(T aData) {
+        if (aData == null) return false;
+        mDataList.clear();
+        mDataList.add(aData);
+        if (mAdapter != null) mAdapter.notifyDataSetChanged();
+        return true;
+    }
+
     public boolean setDataList(List<T> aDataList) {
         if (CollectionUtil.isEmpty(aDataList)) return false;
         mDataList.clear();
@@ -42,16 +50,27 @@ public class TiAdapterListProxy<T> {
         return true;
     }
 
-    public void clearDataList() {
-        mDataList.clear();
-        if (mAdapter != null) mAdapter.notifyDataSetChanged();
+    public boolean addDataList(List<T> aDataList) {
+        return addDataList(mDataList.size(), aDataList);
     }
 
-    public boolean addDataList(List<T> aDataList) {
+    public boolean addDataList(int aIndex, List<T> aDataList) {
         if (CollectionUtil.isEmpty(aDataList)) return false;
-        int lPreviousSize = mDataList.size();
-        mDataList.addAll(aDataList);
-        if (mAdapter != null) mAdapter.notifyItemRangeInserted(lPreviousSize, aDataList.size());
+        if (aIndex > mDataList.size()) aIndex = mDataList.size();
+        mDataList.addAll(aIndex, aDataList);
+        if (mAdapter != null) mAdapter.notifyItemRangeInserted(aIndex, aDataList.size());
+        return true;
+    }
+
+    public boolean addData(T aData) {
+        return addData(mDataList.size(), aData);
+    }
+
+    public boolean addData(int aIndex, T aData) {
+        if (aData == null) return false;
+        if (aIndex > mDataList.size()) aIndex = mDataList.size();
+        mDataList.add(aIndex, aData);
+        if (mAdapter != null) mAdapter.notifyItemInserted(aIndex);
         return true;
     }
 
@@ -70,8 +89,14 @@ public class TiAdapterListProxy<T> {
     }
 
     public boolean removeData(T aItem) {
+        if (aItem == null) return false;
         int lIndex = mDataList.indexOf(aItem);
         return removeData(lIndex);
+    }
+
+    public int index(T aItem) {
+        if (aItem == null) return -1;
+        return mDataList.indexOf(aItem);
     }
 
     public T getDataItem(int aPosition) {
@@ -84,6 +109,11 @@ public class TiAdapterListProxy<T> {
 
     public List<T> getDataList() {
         return mDataList;
+    }
+
+    public void clearData() {
+        mDataList.clear();
+        if (mAdapter != null) mAdapter.notifyDataSetChanged();
     }
 
 }

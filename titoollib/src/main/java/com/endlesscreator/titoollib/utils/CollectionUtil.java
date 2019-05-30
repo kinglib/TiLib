@@ -34,7 +34,7 @@ public class CollectionUtil {
 
     public static <T> String join(CharSequence aDelimiter, List<T> aDataList) {
         StringBuilder lSB = new StringBuilder();
-        if (aDataList != null) {
+        if (!isEmpty(aDataList)) {
             int lSize = aDataList.size();
             for (int i = 0; i < lSize - 1; i++) {
                 lSB.append(aDataList.get(i)).append(aDelimiter);

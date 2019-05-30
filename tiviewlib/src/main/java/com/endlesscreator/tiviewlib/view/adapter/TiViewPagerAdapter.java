@@ -10,9 +10,9 @@ import com.endlesscreator.titoollib.utils.CollectionUtil;
 import java.util.List;
 
 public class TiViewPagerAdapter extends PagerAdapter {
-    private List<View> mViewList;
+    private List<? extends View> mViewList;
 
-    public TiViewPagerAdapter(List<View> aViewList) {
+    public TiViewPagerAdapter(List<? extends View> aViewList) {
         this.mViewList = aViewList;
     }
 

@@ -430,23 +430,40 @@ public class TiExpandableTextView extends AppCompatTextView {
 
                 String endString = getHideEndContent();
 
-                //计算原内容被截取的位置下标
-                int fitPosition =
-                        getFitPosition(endString, endPosition, startPosition, lineWidth, mPaint.measureText(endString), 0);
-                String substring = formatData.getFormatedContent().substring(0, fitPosition);
-                if (substring.endsWith("\n")) {
-                    substring = substring.substring(0, substring.length() - "\n".length());
-                }
-                ssb.append(substring);
 
                 if (mNeedAlwaysShowRight) {
+
                     //计算一下最后一行有没有充满
-                    float lastLineWidth = 0;
-                    for (int i = 0; i < index; i++) {
-                        lastLineWidth += mDynamicLayout.getLineWidth(i);
+                    float lastLineWidth = lineWidth;
+
+                    for (int i = 0; i < index; i++) { // 获取一个最大宽度
+                        float lItemWidth = mDynamicLayout.getLineWidth(i);
+                        if (lItemWidth > lastLineWidth) lastLineWidth = lItemWidth;
                     }
-                    lastLineWidth = lastLineWidth / (index);
-                    float emptyWidth = lastLineWidth - lineWidth - mPaint.measureText(endString);
+
+                    int lViewW = getWidth(); // 和view宽度对比取一个相对较大的
+                    if (lViewW > lastLineWidth) lastLineWidth = lViewW;
+
+
+                    String lAddBeforeStr = "...";
+                    int fitPosition = endPosition;
+                    float lAddBeforeLength = mPaint.measureText(lAddBeforeStr);
+                    float lEndStrLength = mPaint.measureText(endString);
+                    float lPlaceholderStrLength = lAddBeforeLength + lEndStrLength;
+                    if (lPlaceholderStrLength + lineWidth >= lastLineWidth) {
+                        //计算原内容被截取的位置下标
+                        fitPosition = getFitPosition(lAddBeforeStr + endString, endPosition, startPosition, lastLineWidth, lPlaceholderStrLength, 0);
+                    }
+
+                    String substring = formatData.getFormatedContent().substring(0, fitPosition);
+                    if (substring.endsWith("\n")) {
+                        substring = substring.substring(0, substring.length() - "\n".length());
+                    }
+                    ssb.append(substring);
+                    ssb.append(lAddBeforeStr);
+
+
+                    float emptyWidth = lastLineWidth - lineWidth - lPlaceholderStrLength;
                     if (emptyWidth > 0) {
                         float measureText = mPaint.measureText(Space);
                         int count = 0;
@@ -458,6 +475,16 @@ public class TiExpandableTextView extends AppCompatTextView {
                             ssb.append(Space);
                         }
                     }
+                } else {
+                    //计算原内容被截取的位置下标
+                    int fitPosition =
+                            getFitPosition(endString, endPosition, startPosition, lineWidth, mPaint.measureText(endString), 0);
+                    String substring = formatData.getFormatedContent().substring(0, fitPosition);
+                    if (substring.endsWith("\n")) {
+                        substring = substring.substring(0, substring.length() - "\n".length());
+                    }
+                    ssb.append(substring);
+
                 }
 
                 //在被截断的文字后面添加 展开 文字
@@ -497,13 +524,20 @@ public class TiExpandableTextView extends AppCompatTextView {
                     if (mNeedAlwaysShowRight) {
                         //计算一下最后一行有没有充满
                         int index = mDynamicLayout.getLineCount() - 1;
-                        float lineWidth = mDynamicLayout.getLineWidth(index);
+                        float lineWidth = mDynamicLayout.getLineWidth(index); // 最后一行文字的原始宽度
+
                         float lastLineWidth = 0;
-                        for (int i = 0; i < index; i++) {
-                            lastLineWidth += mDynamicLayout.getLineWidth(i);
+
+                        for (int i = 0; i < index; i++) { // 获取一个最大宽度
+                            float lItemWidth = mDynamicLayout.getLineWidth(i);
+                            if (lItemWidth > lastLineWidth) lastLineWidth = lItemWidth;
                         }
-                        lastLineWidth = lastLineWidth / (index);
+
+                        int lViewW = getWidth(); // 和view宽度对比取一个相对较大的
+                        if (lViewW > lastLineWidth) lastLineWidth = lViewW;
+
                         float emptyWidth = lastLineWidth - lineWidth - mPaint.measureText(endString);
+
                         if (emptyWidth > 0) {
                             float measureText = mPaint.measureText(Space);
                             int count = 0;
@@ -879,9 +913,9 @@ public class TiExpandableTextView extends AppCompatTextView {
                 end = matcher.end();
                 newResult.append(content.toString().substring(temp, start));
 //                if (mNeedConvertUrl) {
-                    //将匹配到的内容进行统计处理
-                    datas.add(new FormatData.PositionData(newResult.length() + 1, newResult.length() + 2 + TARGET.length(), matcher.group(), LinkType.LINK_TYPE));
-                    newResult.append(" " + TARGET + " ");
+                //将匹配到的内容进行统计处理
+                datas.add(new FormatData.PositionData(newResult.length() + 1, newResult.length() + 2 + TARGET.length(), matcher.group(), LinkType.LINK_TYPE));
+                newResult.append(" " + TARGET + " ");
 //                } else {
 //                    String result = matcher.group();
 //                    String key = UUIDUtils.getUuid(result.length());

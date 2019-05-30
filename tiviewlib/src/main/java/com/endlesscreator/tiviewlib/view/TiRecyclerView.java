@@ -2,6 +2,7 @@ package com.endlesscreator.tiviewlib.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -12,6 +13,7 @@ import android.view.ViewParent;
 import com.endlesscreator.tibaselib.frame.SingleManager;
 import com.endlesscreator.titoollib.utils.AlgorithmUtil;
 import com.endlesscreator.tiviewlib.view.model.tirecyclerview.ScrollEnabledGridLayoutManager;
+import com.endlesscreator.tiviewlib.view.model.tirecyclerview.TopSmoothScroller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,8 @@ public class TiRecyclerView extends RecyclerView implements Runnable {
     private float mInitRawX, mInitRawY;
     private float mCurRowX, mCurRowY;
     private float mCurX, mCurY;
+
+    private TopSmoothScroller mScroller;
 
     public TiRecyclerView(Context context) {
         super(context);
@@ -217,6 +221,20 @@ public class TiRecyclerView extends RecyclerView implements Runnable {
             }
         }
         return super.onTouchEvent(e);
+    }
+
+    public void scrollTo(int aPosition) {
+        scrollTo(this, aPosition);
+    }
+
+    public void scrollTo(RecyclerView aRecyclerView, int aPosition) {
+        RecyclerView.LayoutManager lLayoutManager = aRecyclerView.getLayoutManager();
+        if (lLayoutManager instanceof LinearLayoutManager) {
+            LinearLayoutManager lManager = (LinearLayoutManager) lLayoutManager;
+            if (mScroller == null) mScroller = new TopSmoothScroller(aRecyclerView.getContext());
+            mScroller.setTargetPosition(aPosition);
+            lManager.startSmoothScroll(mScroller);
+        }
     }
 
     private void checkCancelTouchView() {
