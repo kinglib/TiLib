@@ -38,7 +38,7 @@ dependencies {
 
     // 基础依赖基础库和工具库
     compileOnly 'com.endlesscreator.tibaselib:tibaselib:1.0.3'
-    compileOnly 'com.endlesscreator.titoollib:titoollib:1.0.12'
+    compileOnly 'com.endlesscreator.titoollib:titoollib:1.0.13'
 }
 
 ext {
@@ -60,7 +60,7 @@ ext {
     artifact = 'tiviewlib'
     libraryDescription = 'UI库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.25'
+    libraryVersion = '1.0.26'
 
     //发布者的信息
     developerId = 'ty'

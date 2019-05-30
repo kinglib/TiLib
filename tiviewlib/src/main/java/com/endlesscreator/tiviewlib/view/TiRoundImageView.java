@@ -33,8 +33,11 @@ import java.util.Map;
  * 圆角ImageView控件
  * 注意使用第三方加载图片时，其原理必须是使用系统BitmapDrawable（如：使用 {@link ImageView#setImageBitmap(Bitmap)}} 方法），而非纯自定义的Drawable
  * ScaleType支持 ScaleType.CENTER_CROP 与 ScaleType.FIT_XY 两种模式，默认值为 ScaleType.CENTER_CROP （保证填充屏幕）
+ *
+ * 请使用 {@link TiRoundImg}
  */
 
+@Deprecated
 public class TiRoundImageView extends AppCompatImageView {
     private static final String TAG = TiRoundImageView.class.getName();
 
