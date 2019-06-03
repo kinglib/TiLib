@@ -6,24 +6,38 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
+import android.graphics.Region;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.endlesscreator.tiviewlib.R;
-import com.endlesscreator.tiviewlib.view.model.tiroundlayout.ITiRoundView;
-import com.endlesscreator.tiviewlib.view.model.tiroundlayout.TiRoundTool;
 
 
 /**
  * 圆角布局
- *
+ * <p>
  * 原理为切割布局
- *
  */
-public class TiRoundLayout extends RelativeLayout implements ITiRoundView {
+public class TiRoundLayout extends RelativeLayout {
 
-    private TiRoundTool mTiRoundTool;
+    private float[] mRadii = new float[8];   // left_top, right_top, right_bottom, left_bottom
+    //    private int mRadius;              // 圆角大小
+    private int mStrokeColor;               // 描边颜色
+    private int mStrokeWidth;               // 描边半径
+    private boolean mClipBackground;        // 是否剪裁背景
+
+    private RectF mLayer;                   // 画布图层大小
+    private Region mAreaRegion;             // 内容区域
+    private Paint mPaint;                   // 画笔
+    private Path mClipPath;                 // 剪裁区域路径
+
 
     public TiRoundLayout(Context context) {
         this(context, null);
@@ -47,7 +61,6 @@ public class TiRoundLayout extends RelativeLayout implements ITiRoundView {
 
 
     public void initAttrs(Context context, AttributeSet attrs) {
-        mTiRoundTool = new TiRoundTool(this);
 
         TypedArray lTypedArray = context.obtainStyledAttributes(attrs, R.styleable.TiRoundLayout);
         int lStrokeColor = lTypedArray.getColor(R.styleable.TiRoundLayout_stroke_color, Color.TRANSPARENT);
@@ -61,37 +74,95 @@ public class TiRoundLayout extends RelativeLayout implements ITiRoundView {
         int lLeftBottomRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_left_bottom_radius, lRadius);
         lTypedArray.recycle();
 
-        mTiRoundTool.initAttrs(this, lStrokeColor, lStrokeWidth, lClipBackground, lLeftTopRadius, lRightTopRadius, lRightBottomRadius, lLeftBottomRadius);
+        mStrokeColor = lStrokeColor;
+        mStrokeWidth = lStrokeWidth;
+        mClipBackground = lClipBackground;
+
+        mRadii[0] = lLeftTopRadius;
+        mRadii[1] = lLeftTopRadius;
+
+        mRadii[2] = lRightTopRadius;
+        mRadii[3] = lRightTopRadius;
+
+        mRadii[4] = lRightBottomRadius;
+        mRadii[5] = lRightBottomRadius;
+
+        mRadii[6] = lLeftBottomRadius;
+        mRadii[7] = lLeftBottomRadius;
+
+        mLayer = new RectF();
+        mAreaRegion = new Region();
+        mPaint = new Paint();
+        mPaint.setColor(Color.WHITE);
+        mPaint.setAntiAlias(true);
+        mClipPath = new Path();
+
+        setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        mTiRoundTool.onSizeChanged(this, w, h, oldw, oldh);
+        super.onSizeChanged(w, h, oldw, oldh);
+        mLayer.set(0, 0, w, h);
+        refreshRegion(this);
     }
 
-    @Override
-    public void onSizeChangedSuper(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-    }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
-        mTiRoundTool.dispatchDraw(canvas);
-    }
-
-    @Override
-    public void dispatchDrawSuper(Canvas canvas) {
+        canvas.saveLayer(mLayer, null, Canvas.ALL_SAVE_FLAG);
         super.dispatchDraw(canvas);
+        onClipDraw(canvas);
+        canvas.restore();
     }
 
-    @SuppressLint("MissingSuperCall")
     @Override
     public void draw(Canvas canvas) {
-        mTiRoundTool.draw(this, canvas);
+        refreshRegion(this);
+        if (mClipBackground) {
+            canvas.save();
+            canvas.clipPath(mClipPath);
+            super.draw(canvas);
+            canvas.restore();
+        } else {
+            super.draw(canvas);
+        }
     }
 
-    @Override
-    public void drawSuper(Canvas canvas) {
-        super.draw(canvas);
+
+    private void onClipDraw(Canvas aCanvas) {
+        if (mStrokeWidth > 0) {
+            // 将与描边区域重叠的内容裁剪掉
+            mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+            mPaint.setColor(Color.WHITE);
+            mPaint.setStrokeWidth(mStrokeWidth * 2);
+            mPaint.setStyle(Paint.Style.STROKE);
+            aCanvas.drawPath(mClipPath, mPaint);
+            // 绘制描边
+            mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
+            mPaint.setColor(mStrokeColor);
+            mPaint.setStyle(Paint.Style.STROKE);
+            aCanvas.drawPath(mClipPath, mPaint);
+        }
+        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+        mPaint.setColor(Color.WHITE);
+        mPaint.setStyle(Paint.Style.FILL);
+        aCanvas.drawPath(mClipPath, mPaint);
+    }
+
+
+    private void refreshRegion(View aView) {
+        int lW = (int) mLayer.width();
+        int lH = (int) mLayer.height();
+        RectF lAreas = new RectF();
+        lAreas.left = aView.getPaddingLeft();
+        lAreas.top = aView.getPaddingTop();
+        lAreas.right = lW - aView.getPaddingRight();
+        lAreas.bottom = lH - aView.getPaddingBottom();
+        mClipPath.reset();
+        mClipPath.addRoundRect(lAreas, mRadii, Path.Direction.CW);
+        Region clip = new Region((int) lAreas.left, (int) lAreas.top, (int) lAreas.right, (int) lAreas.bottom);
+        mAreaRegion.setPath(mClipPath, clip);
     }
 }

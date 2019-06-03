@@ -22,8 +22,6 @@
         <attr name="loading_icon_background_fill_color" format="color" />
     </declare-styleable>
 
-    <attr name="stroke_width" format="dimension" />
-    <attr name="stroke_color" format="color" />
 
     <declare-styleable name="TiRoundLayout">
         <attr name="radius" />
@@ -32,8 +30,8 @@
         <attr name="right_bottom_radius" />
         <attr name="left_bottom_radius" />
 
-        <attr name="stroke_width" />
-        <attr name="stroke_color" />
+        <attr name="stroke_width" format="dimension" />
+        <attr name="stroke_color" format="color" />
 
         <attr name="clip_bg" format="boolean" />
     </declare-styleable>
@@ -44,9 +42,6 @@
         <attr name="right_top_radius" />
         <attr name="right_bottom_radius" />
         <attr name="left_bottom_radius" />
-
-        <attr name="stroke_width" />
-        <attr name="stroke_color" />
     </declare-styleable>
 
 
