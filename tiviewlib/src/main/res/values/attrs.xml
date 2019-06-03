@@ -119,4 +119,15 @@
 
     </declare-styleable>
 
+
+    <declare-styleable name="TiDotRadioButton">
+
+        <attr name="show_dot" format="boolean" />
+        <attr name="dot_radius" format="dimension" />
+        <attr name="dot_margin_top" format="dimension" />
+        <attr name="dot_margin_right" format="dimension" />
+        <attr name="dot_color" format="color" />
+
+    </declare-styleable>
+
 </resources>
