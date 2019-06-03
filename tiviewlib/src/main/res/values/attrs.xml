@@ -33,6 +33,7 @@
         <attr name="stroke_width" format="dimension" />
         <attr name="stroke_color" format="color" />
 
+        <!-- 切割背景会有锯齿，可临时使用内部底层添加一个View解决 -->
         <attr name="clip_bg" format="boolean" />
     </declare-styleable>
 
