@@ -229,11 +229,10 @@ public class TiRecyclerView extends RecyclerView implements Runnable {
 
     public void scrollTo(RecyclerView aRecyclerView, int aPosition) {
         RecyclerView.LayoutManager lLayoutManager = aRecyclerView.getLayoutManager();
-        if (lLayoutManager instanceof LinearLayoutManager) {
-            LinearLayoutManager lManager = (LinearLayoutManager) lLayoutManager;
+        if (lLayoutManager != null) {
             if (mScroller == null) mScroller = new TopSmoothScroller(aRecyclerView.getContext());
             mScroller.setTargetPosition(aPosition);
-            lManager.startSmoothScroll(mScroller);
+            lLayoutManager.startSmoothScroll(mScroller);
         }
     }
 
