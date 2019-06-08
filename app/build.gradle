@@ -34,11 +34,16 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 
-    implementation 'com.endlesscreator.tibaselib:tibaselib:1.0.3'
-    implementation 'com.endlesscreator.titoollib:titoollib:1.0.3'
-    implementation 'com.endlesscreator.tiviewlib:tiviewlib:1.0.1'
+//    implementation 'com.endlesscreator.tibaselib:tibaselib:1.0.3'
+//    implementation 'com.endlesscreator.titoollib:titoollib:1.0.5'
+//    implementation 'com.endlesscreator.tiviewlib:tiviewlib:1.0.13'
+    implementation project(':tibaselib')
+    implementation project(':titoollib')
+    implementation project(':tiviewlib')
 
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     // 支持Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"

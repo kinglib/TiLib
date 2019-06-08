@@ -20,6 +20,9 @@ import com.endlesscreator.tiviewlib.R;
  * 圆角图片
  * <p>
  * {@link TiRoundLayout} 的简版，单用于显示图片时不用再包装一层
+ * <p>
+ * 圆角规则注意事项：
+ * 各边圆角大于各边边距时，按照单独每个边的宽高比例等比缩小圆角，和 {@link TiRoundLayout} 略有不同，按需使用
  */
 public class TiRoundImg extends AppCompatImageView {
 

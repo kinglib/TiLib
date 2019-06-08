@@ -23,7 +23,14 @@ import com.endlesscreator.tiviewlib.R;
 /**
  * 圆角布局
  * <p>
- * 原理为切割布局
+ * {@link TiRoundImg} 的升级版
+ * <p>
+ * 若单独加载一张图片圆角时，可使用 {@link TiRoundImg} 就不用再包装一层
+ * <p>
+ * 圆角规则注意事项：
+ * 各边圆角大于各边边距时，按照所有边的宽高比例等比缩小圆角，和 {@link TiRoundImg} 略有不同，按需使用
+ * <p>
+ * 注意：尽量避免使用裁剪背景，因为裁剪可能会出现边缘锯齿
  */
 public class TiRoundLayout extends RelativeLayout {
 

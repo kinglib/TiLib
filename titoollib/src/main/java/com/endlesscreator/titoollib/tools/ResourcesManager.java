@@ -93,6 +93,10 @@ public class ResourcesManager {
         return getResID("color", aName);
     }
 
+    public int getFont(String aName) {
+        return getResID("font", aName);
+    }
+
     public int getBool(String aName) {
         return getResID("bool", aName);
     }
