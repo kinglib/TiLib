@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 此class主要为瀑布流和横向填充视图组合展示设计，其ViewHolder需要实现 {@link IFullSpanDelegateViewHolder}
+ * 此class主要为瀑布流和横向填充视图组合展示设计，可将其设置为  {@link RecyclerView} 的Adapter作为代理
+ * <p>
+ * 其ViewHolder需要实现 {@link IFullSpanDelegateViewHolder} 或继承 {@link FullSpanDelegateViewHolderDefault}
+ * <p>
+ * 其子Adapter需要实现  {@link IItemRecyclerViewDelegateAdapter} 或继承 {@link ItemRecyclerViewDelegateAdapterDefault}
  */
 public class TiRecyclerViewDelegateAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ITiRecyclerViewDelegateAdapter {
 

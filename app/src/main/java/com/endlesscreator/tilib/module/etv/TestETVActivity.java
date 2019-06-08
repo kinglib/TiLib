@@ -1,15 +1,12 @@
-package com.endlesscreator.tilib;
+package com.endlesscreator.tilib.module.etv;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextPaint;
 import android.text.TextUtils;
-import android.view.View;
 
-import com.endlesscreator.tibaselib.frame.TApp;
+import com.endlesscreator.tilib.base.BaseActivity;
+import com.endlesscreator.tilib.R;
 import com.endlesscreator.titoollib.utils.InfoUtil;
-import com.endlesscreator.titoollib.utils.LogUtil;
 import com.endlesscreator.tiviewlib.view.TiExpandableTextView;
 import com.endlesscreator.tiviewlib.view.model.tiexpandabletextview.app.LinkType;
 import com.endlesscreator.tiviewlib.view.model.tiexpandabletextview.model.ExpandableTool;
@@ -71,7 +68,6 @@ public class TestETVActivity extends BaseActivity implements TiExpandableTextVie
 
     @Override
     public void onLinkClickListener(LinkType type, String content, String selfContent) {
-        InfoUtil.INSTANCE.show("type=" + type + ",content=" + content + ",selfContent=" + selfContent);
-
+        show("type=" + type + ",content=" + content + ",selfContent=" + selfContent);
     }
 }

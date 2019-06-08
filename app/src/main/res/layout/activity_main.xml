@@ -36,6 +36,14 @@
                 android:text="圆角" />
 
 
+            <Button
+                android:id="@+id/main_test_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="click"
+                android:text="列表瀑布流" />
+
+
         </LinearLayout>
 
     </ScrollView>

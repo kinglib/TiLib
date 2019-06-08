@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.endlesscreator.tiviewlib.view.TiRoundLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:radius="8dp"
+        app:stroke_color="#f00"
+        app:stroke_width="1dp">
+
+        <TextView
+            android:id="@+id/item_recycler_view_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="4dp"
+            android:text="123"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_recycler_view_tv"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_rv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="删除"
+                android:textColor="#f00" />
+
+            <TextView
+                android:id="@+id/item_rv_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="插入数据"
+                android:textColor="#00f" />
+
+            <TextView
+                android:id="@+id/item_rv_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="变更数据"
+                android:textColor="#0f0" />
+
+        </LinearLayout>
+    </com.endlesscreator.tiviewlib.view.TiRoundLayout>
+
+
+</RelativeLayout>

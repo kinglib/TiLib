@@ -1,4 +1,4 @@
-package com.endlesscreator.tilib;
+package com.endlesscreator.tilib.base;
 
 import android.app.Application;
 

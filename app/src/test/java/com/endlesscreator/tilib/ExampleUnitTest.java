@@ -14,4 +14,16 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void test() {
+        String la = "1.56.";
+
+        System.out.println("la = " + la.charAt(la.length()-1));
+        System.out.println("la = " + Character.isDigit(la.charAt(la.length()-1)));
+
+
+    }
+
+
 }
