@@ -1,16 +1,14 @@
 package com.endlesscreator.tilib.module.vp.holder;
 
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.endlesscreator.tilib.R;
 import com.endlesscreator.tilib.module.vp.bean.ItemBean;
-import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.FullSpanDelegateViewHolderDefault;
-import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.IFullSpanDelegateViewHolder;
+import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.FullSpanDelegateViewHolderAbs;
 
-public class ItemHolderB extends FullSpanDelegateViewHolderDefault {
+public class ItemHolderB extends FullSpanDelegateViewHolderAbs<ItemBean> {
 
     private TextView tv;
 
@@ -20,8 +18,20 @@ public class ItemHolderB extends FullSpanDelegateViewHolderDefault {
         tv.setTextSize(15);
     }
 
-    public void updateUI(ItemBean aItem) {
-        tv.setText(aItem.toString());
+    @Override
+    public void updateUI(ItemBean aDataItem) {
+        tv.setText(aDataItem.toString());
+        tv.setTextColor(Color.BLACK);
     }
 
+    @Override
+    public void updateChange(ItemBean aDataItem) {
+        tv.setText(aDataItem.toString());
+        tv.setTextColor(Color.BLUE);
+    }
+
+    @Override
+    public boolean isFullSpan() {
+        return false;
+    }
 }

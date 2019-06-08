@@ -12,6 +12,9 @@ import com.endlesscreator.tilib.module.vp.adapter.ItemAdapterB;
 import com.endlesscreator.tilib.module.vp.bean.ItemBean;
 import com.endlesscreator.tiviewlib.view.TiRecyclerView;
 import com.endlesscreator.tiviewlib.view.TiRefreshLayout;
+import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.FullSpanDelegateViewHolderAbs;
+import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.ItemDelegateAdapterAbsEx;
+import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.ItemDelegateAdapterInfo;
 import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.TiRecyclerViewDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -35,7 +38,8 @@ public class TestRecyclerViewActivity extends BaseActivity implements OnRefreshL
     private List<Integer> mClickIdList = Arrays.asList(
             R.id.item_rv_delete,
             R.id.item_rv_add,
-            R.id.item_rv_change
+            R.id.item_rv_change,
+            R.id.item_rv_clear
     );
 
     private Random mRandom;
@@ -88,7 +92,7 @@ public class TestRecyclerViewActivity extends BaseActivity implements OnRefreshL
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         show("onRefresh");
 
-        mAdapterA.setDataList(makeList(2, 0));
+        mAdapterA.setDataList(makeList(2, 0), mRecyclerView);
         mAdapterB.setDataList(makeList(10, 0));
 
         mRefreshLayout.finishRefresh();
@@ -106,7 +110,7 @@ public class TestRecyclerViewActivity extends BaseActivity implements OnRefreshL
     @Override
     public void onItemClick(RecyclerView aRecyclerView, RecyclerView.ViewHolder aViewHolder, int aPosition, float aRawX, float aRawY) {
 
-        TiRecyclerViewDelegateAdapter.AdapterInfo lAdapterInfo = mDelegateAdapter.findAdapterInfo(aPosition);
+        ItemDelegateAdapterInfo lAdapterInfo = mDelegateAdapter.findAdapterInfo(aPosition);
 
         show("item click, lAdapterInfo= " + lAdapterInfo);
     }
@@ -115,22 +119,45 @@ public class TestRecyclerViewActivity extends BaseActivity implements OnRefreshL
     @Override
     public void onItemChildViewClick(RecyclerView aRecyclerView, RecyclerView.ViewHolder aViewHolder, View aChildView, int aPosition, float aRawX, float aRawY) {
 
-        TiRecyclerViewDelegateAdapter.AdapterInfo lAdapterInfo = mDelegateAdapter.findAdapterInfo(aPosition);
+        ItemDelegateAdapterInfo lAdapterInfo = mDelegateAdapter.findAdapterInfo(aPosition);
 
         int lID = aChildView.getId();
         int index = mClickIdList.indexOf(lID);
 
         show("operate = " + index + ", lAdapterInfo = " + lAdapterInfo);
 
+        ItemDelegateAdapterAbsEx<? extends FullSpanDelegateViewHolderAbs, ItemBean> lAdapter = lAdapterInfo.adapterIndex == 0 ? mAdapterA : mAdapterB;
+
         switch (index) {
             case 0: // 删除
-
+                lAdapter.remove(lAdapterInfo.adapterInnerPosition);
                 return;
             case 1: // 插入
 
+                ItemBean data = lAdapter.getData(lAdapterInfo.adapterInnerPosition);
+                lAdapter.add(lAdapterInfo.adapterInnerPosition, makeItem(data.getId() - 1));
+
+                // 如果添加在最前面，则自动滚动到插入数据所在位置 (可选)
+                int[] lFirstVisibleItemPositions = new int[mLayoutManager.getSpanCount()];
+                mLayoutManager.findFirstVisibleItemPositions(lFirstVisibleItemPositions);
+                int lFirstVisibleItemPosition = lFirstVisibleItemPositions[0];
+                for (int i = 1, j = lFirstVisibleItemPositions.length; i < j; i++) {
+                    int lItemPosition = lFirstVisibleItemPositions[i];
+                    if (lItemPosition < lFirstVisibleItemPosition)
+                        lFirstVisibleItemPosition = lItemPosition;
+                }
+                if (lAdapterInfo.sourcePosition <= lFirstVisibleItemPosition) {
+                    mRecyclerView.scrollTo(lAdapterInfo.sourcePosition);
+                }
+
                 return;
             case 2: // 变化
-
+                data = lAdapter.getData(lAdapterInfo.adapterInnerPosition);
+                data.setText(makeText(data.getId()));
+                lAdapter.changePayload(lAdapterInfo.adapterInnerPosition);
+                return;
+            case 3: // 清除列表
+                lAdapter.proxy().removeData();
                 return;
         }
 
@@ -140,10 +167,16 @@ public class TestRecyclerViewActivity extends BaseActivity implements OnRefreshL
     private List<ItemBean> makeList(int size, int start) {
         List<ItemBean> list = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            list.add(new ItemBean(start + i, makeText(i)));
+            list.add(makeItem(start + i));
         }
         return list;
     }
+
+
+    private ItemBean makeItem(int id) {
+        return new ItemBean(id, makeText(id));
+    }
+
 
     private String makeText(int id) {
         StringBuilder lSB = new StringBuilder();

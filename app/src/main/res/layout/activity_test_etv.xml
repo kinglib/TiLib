@@ -7,13 +7,11 @@
     android:background="#5555"
     tools:context=".module.etv.TestETVActivity">
 
-
     <com.endlesscreator.tiviewlib.view.TiExpandableTextView
         android:id="@+id/etv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineSpacingMultiplier="2"
-        android:padding="10dp"
         app:ep_contract_color="#f0f"
         app:ep_contract_text="授器"
         app:ep_expand_color="#00f"
