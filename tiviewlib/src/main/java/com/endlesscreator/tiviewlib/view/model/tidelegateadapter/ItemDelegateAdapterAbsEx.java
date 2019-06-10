@@ -14,7 +14,7 @@ public abstract class ItemDelegateAdapterAbsEx<VH extends FullSpanDelegateViewHo
     }
 
     public void changePayload(int aIndex) {
-        proxy().notifyItemChanged(aIndex, CHANGE_PAYLOAD);
+       change(aIndex, CHANGE_PAYLOAD);
     }
 
     @Override

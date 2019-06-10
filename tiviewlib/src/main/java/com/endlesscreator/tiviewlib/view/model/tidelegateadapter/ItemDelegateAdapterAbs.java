@@ -7,6 +7,12 @@ import com.endlesscreator.tiviewlib.view.adapter.tool.TiAdapterListProxy;
 
 import java.util.List;
 
+/**
+ * 提供了数据集合及基础操作，如果不需要，可仿照本class实现自己需要的ItemAdapter逻辑
+ *
+ * @param <VH> 可继承自 {@link FullSpanDelegateViewHolderAbs} 或仿照其实现
+ * @param <T>  数据集合的Item类型
+ */
 public abstract class ItemDelegateAdapterAbs<VH extends RecyclerView.ViewHolder, T> extends ItemRecyclerViewDelegateAdapterDefault<VH> {
 
     private TiAdapterListProxy<T> proxy;
@@ -45,7 +51,21 @@ public abstract class ItemDelegateAdapterAbs<VH extends RecyclerView.ViewHolder,
     }
 
     public void change(int aIndex) {
+        if (aIndex < 0) return;
         proxy().notifyItemChanged(aIndex);
+    }
+
+    public void change(int aIndex, Object aPayload) {
+        if (aIndex < 0) return;
+        proxy().notifyItemChanged(aIndex, aPayload);
+    }
+
+    public void change(T aData) {
+        change(proxy.index(aData));
+    }
+
+    public void change(T aData, Object aPayload) {
+        change(proxy.index(aData), aPayload);
     }
 
     public T getData(int position) {
