@@ -20,9 +20,11 @@ public abstract class ItemDelegateAdapterForChange<VH extends FullSpanDelegateVi
         holder.updateUI(getData(position));
     }
 
-    public boolean handlePayloadForChange(VH holder, int position) {
+    /**
+     * 对应定义 {@link #CHANGE_PAYLOAD}
+     */
+    public void handlePayloadForChange(VH holder, int position) {
         holder.updateChange(getData(position));
-        return true;
     }
 
 }

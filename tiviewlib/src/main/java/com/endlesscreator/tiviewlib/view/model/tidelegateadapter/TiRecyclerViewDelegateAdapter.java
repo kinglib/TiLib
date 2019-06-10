@@ -23,9 +23,10 @@ public class TiRecyclerViewDelegateAdapter extends RecyclerView.Adapter<Recycler
         mAdapters = new ArrayList<>();
     }
 
-    public void addAdapter(IItemRecyclerViewDelegateAdapter aItemAdapter) {
+    public <IA extends IItemRecyclerViewDelegateAdapter> IA addAdapter(IA aItemAdapter) {
         mAdapters.add(aItemAdapter);
         aItemAdapter.setDelegateAdapter(this);
+        return aItemAdapter;
     }
 
     @Override

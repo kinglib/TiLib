@@ -64,12 +64,10 @@ public class TestRecyclerViewActivity extends BaseActivity implements OnRefreshL
         mDelegateAdapter = new TiRecyclerViewDelegateAdapter();
 
         // 第一种样式的Adapter，横向填充
-        mAdapterA = new ItemAdapterA();
-        mDelegateAdapter.addAdapter(mAdapterA);
+        mAdapterA = mDelegateAdapter.addAdapter(new ItemAdapterA());
 
         // 第二种类型的Adapter，瀑布流
-        mAdapterB = new ItemAdapterB();
-        mDelegateAdapter.addAdapter(mAdapterB);
+        mAdapterB = mDelegateAdapter.addAdapter(new ItemAdapterB());
 
         // 设置布局管理，两列的瀑布流
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);

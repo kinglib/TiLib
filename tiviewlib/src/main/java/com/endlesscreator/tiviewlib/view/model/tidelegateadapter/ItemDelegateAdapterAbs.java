@@ -68,8 +68,8 @@ public abstract class ItemDelegateAdapterAbs<VH extends RecyclerView.ViewHolder,
         proxy.addDataList(aDataList);
     }
 
-    public void remove(int aIndex) {
-        proxy.removeData(aIndex);
+    public void add(DI aData) {
+        proxy.addData(aData);
     }
 
     public void add(int aIndex, DI aData) {
@@ -81,18 +81,30 @@ public abstract class ItemDelegateAdapterAbs<VH extends RecyclerView.ViewHolder,
         proxy().notifyItemChanged(aIndex);
     }
 
+    public void change(DI aData) {
+        change(proxy.index(aData));
+    }
+
     public void change(int aIndex, String aPayload) {
         if (aIndex < 0) return;
         addPayload(aPayload); // 自动添加回调
         proxy().notifyItemChanged(aIndex, aPayload);
     }
 
-    public void change(DI aData) {
-        change(proxy.index(aData));
-    }
-
     public void change(DI aData, String aPayload) {
         change(proxy.index(aData), aPayload);
+    }
+
+    public void remove(int aIndex) {
+        proxy.removeData(aIndex);
+    }
+
+    public void remove(DI aData) {
+        proxy.removeData(aData);
+    }
+
+    public void remove() {
+        proxy.removeData();
     }
 
     public DI getData(int position) {
@@ -129,21 +141,23 @@ public abstract class ItemDelegateAdapterAbs<VH extends RecyclerView.ViewHolder,
                         }
                     }
                 }
-                if (lMethod != null) return (boolean) lMethod.invoke(this, holder, position);
+                if (lMethod != null) {
+                    lMethod.invoke(this, holder, position);
+                    return true;
+                }
             } catch (Exception e) {
                 LogUtil.e(e);
             }
             // 如果子类都没有重写，将走默认处理
-            return handleFirstPayload(holder, position);
+            handleFirstPayload(holder, position);
+            return true;
         }
         return false;
     }
 
-    public boolean handleFirstPayload(VH holder, int position) {
+    public void handleFirstPayload(VH holder, int position) {
         LogUtil.i("请检查是否实现对应的handlePayload函数");
-        return true;
     }
-
 
     @Override
     public int getItemCount() {
