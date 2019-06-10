@@ -13,6 +13,8 @@ public interface IItemRecyclerViewDelegateAdapter<VH extends RecyclerView.ViewHo
 
     void setDelegateAdapter(ITiRecyclerViewDelegateAdapter aDelegateAdapter);
 
+    ITiRecyclerViewDelegateAdapter delegateAdapter();
+
     int getItemCount();
 
     VH onCreateViewHolder(ViewGroup parent, int viewType);

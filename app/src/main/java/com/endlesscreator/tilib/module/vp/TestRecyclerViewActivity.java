@@ -12,8 +12,8 @@ import com.endlesscreator.tilib.module.vp.adapter.ItemAdapterB;
 import com.endlesscreator.tilib.module.vp.bean.ItemBean;
 import com.endlesscreator.tiviewlib.view.TiRecyclerView;
 import com.endlesscreator.tiviewlib.view.TiRefreshLayout;
-import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.FullSpanDelegateViewHolderAbs;
-import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.ItemDelegateAdapterAbsEx;
+import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.FullSpanDelegateViewHolderForChange;
+import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.ItemDelegateAdapterForChange;
 import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.ItemDelegateAdapterInfo;
 import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.TiRecyclerViewDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -126,7 +126,7 @@ public class TestRecyclerViewActivity extends BaseActivity implements OnRefreshL
 
         show("operate = " + index + ", lAdapterInfo = " + lAdapterInfo);
 
-        ItemDelegateAdapterAbsEx<? extends FullSpanDelegateViewHolderAbs, ItemBean> lAdapter = lAdapterInfo.adapterIndex == 0 ? mAdapterA : mAdapterB;
+        ItemDelegateAdapterForChange<? extends FullSpanDelegateViewHolderForChange, ItemBean> lAdapter = lAdapterInfo.adapterIndex == 0 ? mAdapterA : mAdapterB;
 
         switch (index) {
             case 0: // 删除

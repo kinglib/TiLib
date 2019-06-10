@@ -7,11 +7,16 @@ import java.util.List;
 
 public abstract class ItemRecyclerViewDelegateAdapterDefault<VH extends RecyclerView.ViewHolder> implements IItemRecyclerViewDelegateAdapter<VH> {
 
-    protected ITiRecyclerViewDelegateAdapter mDelegateAdapter;
+    private ITiRecyclerViewDelegateAdapter delegateAdapter;
 
     @Override
     public void setDelegateAdapter(ITiRecyclerViewDelegateAdapter aDelegateAdapter) {
-        mDelegateAdapter = aDelegateAdapter;
+        delegateAdapter = aDelegateAdapter;
+    }
+
+    @Override
+    public ITiRecyclerViewDelegateAdapter delegateAdapter() {
+        return delegateAdapter;
     }
 
     @Override
@@ -21,51 +26,51 @@ public abstract class ItemRecyclerViewDelegateAdapterDefault<VH extends Recycler
 
     @Override
     public void notifyDataSetChanged() {
-        mDelegateAdapter.notifyDataSetChanged(this);
+        delegateAdapter.notifyDataSetChanged(this);
     }
 
     @Override
     public void notifyItemChanged(int position) {
-        mDelegateAdapter.notifyItemChanged(this, position);
+        delegateAdapter.notifyItemChanged(this, position);
     }
 
     @Override
     public void notifyItemChanged(int position, @Nullable Object payload) {
-        mDelegateAdapter.notifyItemChanged(this, position, payload);
+        delegateAdapter.notifyItemChanged(this, position, payload);
     }
 
     @Override
     public void notifyItemRangeChanged(int positionStart, int itemCount) {
-        mDelegateAdapter.notifyItemRangeChanged(this, positionStart, itemCount);
+        delegateAdapter.notifyItemRangeChanged(this, positionStart, itemCount);
     }
 
     @Override
     public void notifyItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
-        mDelegateAdapter.notifyItemRangeChanged(this, positionStart, itemCount, payload);
+        delegateAdapter.notifyItemRangeChanged(this, positionStart, itemCount, payload);
     }
 
     @Override
     public void notifyItemInserted(int position) {
-        mDelegateAdapter.notifyItemInserted(this, position);
+        delegateAdapter.notifyItemInserted(this, position);
     }
 
     @Override
     public void notifyItemRangeInserted(int positionStart, int itemCount) {
-        mDelegateAdapter.notifyItemRangeInserted(this, positionStart, itemCount);
+        delegateAdapter.notifyItemRangeInserted(this, positionStart, itemCount);
     }
 
     @Override
     public void notifyItemRemoved(int position) {
-        mDelegateAdapter.notifyItemRemoved(this, position);
+        delegateAdapter.notifyItemRemoved(this, position);
     }
 
     @Override
     public void notifyItemRangeRemoved(int positionStart, int itemCount) {
-        mDelegateAdapter.notifyItemRangeRemoved(this, positionStart, itemCount);
+        delegateAdapter.notifyItemRangeRemoved(this, positionStart, itemCount);
     }
 
     @Override
     public void notifyItemMoved(int fromPosition, int toPosition) {
-        mDelegateAdapter.notifyItemMoved(this, fromPosition, toPosition);
+        delegateAdapter.notifyItemMoved(this, fromPosition, toPosition);
     }
 }

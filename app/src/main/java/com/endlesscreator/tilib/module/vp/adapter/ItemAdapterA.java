@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import com.endlesscreator.tilib.R;
 import com.endlesscreator.tilib.module.vp.bean.ItemBean;
 import com.endlesscreator.tilib.module.vp.holder.ItemHolderA;
-import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.ItemDelegateAdapterAbsEx;
+import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.ItemDelegateAdapterForChange;
 
 
-public class ItemAdapterA extends ItemDelegateAdapterAbsEx<ItemHolderA, ItemBean> {
+public class ItemAdapterA extends ItemDelegateAdapterForChange<ItemHolderA, ItemBean> {
 
     @NonNull
     @Override

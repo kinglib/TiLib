@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 此class主要为瀑布流和横向填充视图组合展示设计，可将其设置为  {@link RecyclerView} 的Adapter作为代理
  * <p>
- * 其ViewHolder需要实现 {@link IFullSpanDelegateViewHolder} 或继承 {@link FullSpanDelegateViewHolderAbs}
+ * 其ViewHolder需要实现 {@link IFullSpanDelegateViewHolder} 或继承 {@link FullSpanDelegateViewHolderForChange}
  * <p>
  * 其子Adapter需要实现  {@link IItemRecyclerViewDelegateAdapter} 或继承 {@link ItemRecyclerViewDelegateAdapterDefault}
  */
@@ -54,6 +54,12 @@ public class TiRecyclerViewDelegateAdapter extends RecyclerView.Adapter<Recycler
         return lSize;
     }
 
+    /**
+     * 若使用多个ItemAdapter：
+     * 可使用 {@link #notifyItemRangeRemoved(IItemRecyclerViewDelegateAdapter, int, int)}
+     * 加上 {@link #notifyItemInserted(IItemRecyclerViewDelegateAdapter, int)}
+     * 组合完成此效果
+     */
     @Override
     public void notifyDataSetChanged(IItemRecyclerViewDelegateAdapter aAdapter) {
         // TODO 此方法不是进行区域刷新，待优化
@@ -120,11 +126,11 @@ public class TiRecyclerViewDelegateAdapter extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
     }
 
-
+    @SuppressWarnings("unchecked")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
         ItemDelegateAdapterInfo lAdapterInfo = findAdapterInfo(position);
-        try { // 一般没问题，兼容极端情况
+        try { // 不进行泛型检测，因为ItemAdapter的holder可能都不同，所以不约束holder只能为RecyclerView.ViewHolder的某一种子类型
             lAdapterInfo.adapter.onBindViewHolder(holder, position - lAdapterInfo.adapterStartPosition, payloads);
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,9 +167,10 @@ public class TiRecyclerViewDelegateAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public ItemDelegateAdapterInfo findAdapterInfo(int aRVPosition) {
         if (aRVPosition >= 0) {
+            IItemRecyclerViewDelegateAdapter lAdapter;
             int lAdapterStartPos = 0;
             for (int i = 0, j = mAdapters.size(); i < j; i++) {
-                IItemRecyclerViewDelegateAdapter lAdapter = mAdapters.get(i);
+                lAdapter = mAdapters.get(i);
                 int lItemCount = lAdapter.getItemCount();
                 if (aRVPosition < lAdapterStartPos + lItemCount) {
                     return new ItemDelegateAdapterInfo(aRVPosition, lAdapter, i, lAdapterStartPos, lItemCount, aRVPosition - lAdapterStartPos);

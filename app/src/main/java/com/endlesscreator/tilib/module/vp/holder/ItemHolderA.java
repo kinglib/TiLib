@@ -6,9 +6,9 @@ import android.widget.TextView;
 
 import com.endlesscreator.tilib.R;
 import com.endlesscreator.tilib.module.vp.bean.ItemBean;
-import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.FullSpanDelegateViewHolderAbs;
+import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.FullSpanDelegateViewHolderForChange;
 
-public class ItemHolderA extends FullSpanDelegateViewHolderAbs<ItemBean> {
+public class ItemHolderA extends FullSpanDelegateViewHolderForChange<ItemBean> {
 
     private TextView tv;
 
