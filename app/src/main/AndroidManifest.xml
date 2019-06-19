@@ -24,6 +24,7 @@
         <activity android:name=".module.round.TestRoundActivity" />
         <activity android:name=".module.etv.TestETVActivity" />
         <activity android:name=".module.vp.TestRecyclerViewActivity" />
+        <activity android:name=".module.bounce.TestBounceActivity"/>
 
 
     </application>

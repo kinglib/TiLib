@@ -43,6 +43,13 @@
                 android:onClick="click"
                 android:text="列表瀑布流" />
 
+            <Button
+                android:id="@+id/main_test_bounce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="click"
+                android:text="弹出菜单效果" />
+
 
         </LinearLayout>
 
