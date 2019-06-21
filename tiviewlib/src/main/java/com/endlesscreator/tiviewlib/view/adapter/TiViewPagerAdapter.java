@@ -10,15 +10,15 @@ import com.endlesscreator.titoollib.utils.CollectionUtil;
 import java.util.List;
 
 public class TiViewPagerAdapter extends PagerAdapter {
-    private List<? extends View> mViewList;
+    private List<? extends View> mList;
 
-    public TiViewPagerAdapter(List<? extends View> aViewList) {
-        this.mViewList = aViewList;
+    public TiViewPagerAdapter(List<? extends View> aList) {
+        this.mList = aList;
     }
 
     @Override
     public int getCount() {
-        return CollectionUtil.isEmpty(mViewList) ? 0 : mViewList.size();
+        return CollectionUtil.getSize(mList);
     }
 
 
@@ -35,7 +35,7 @@ public class TiViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View lItemView = mViewList.get(position);
+        View lItemView = mList.get(position);
         container.addView(lItemView);
         return lItemView;
     }
