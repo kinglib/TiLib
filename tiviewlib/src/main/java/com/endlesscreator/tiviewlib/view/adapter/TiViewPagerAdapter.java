@@ -18,7 +18,7 @@ public class TiViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return CollectionUtil.getSize(mList);
+        return CollectionUtil.size(mList);
     }
 
 

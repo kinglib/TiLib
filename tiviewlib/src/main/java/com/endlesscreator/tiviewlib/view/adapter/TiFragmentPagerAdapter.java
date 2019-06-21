@@ -19,7 +19,7 @@ public class TiFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return CollectionUtil.getSize(mList);
+        return CollectionUtil.size(mList);
     }
 
 

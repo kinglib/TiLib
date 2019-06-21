@@ -45,7 +45,7 @@ public class TiAdapterListProxy<T> {
         setAdapter(aAdapter);
         setAdapter(aItemAdapter);
         mDataList = new ArrayList<>();
-        if (!CollectionUtil.isEmpty(aDataList)) mDataList.addAll(aDataList);
+        if (!CollectionUtil.empty(aDataList)) mDataList.addAll(aDataList);
     }
 
     public void setAdapter(RecyclerView.Adapter aAdapter) {
@@ -66,7 +66,7 @@ public class TiAdapterListProxy<T> {
     }
 
     public boolean setDataList(List<T> aDataList) {
-        if (CollectionUtil.isEmpty(aDataList)) return false;
+        if (CollectionUtil.empty(aDataList)) return false;
         mDataList.clear();
         mDataList.addAll(aDataList);
         if (mAdapter != null) mAdapter.notifyDataSetChanged();
@@ -79,7 +79,7 @@ public class TiAdapterListProxy<T> {
     }
 
     public boolean addDataList(int aIndex, List<T> aDataList) {
-        if (CollectionUtil.isEmpty(aDataList)) return false;
+        if (CollectionUtil.empty(aDataList)) return false;
         if (aIndex > mDataList.size()) aIndex = mDataList.size();
         mDataList.addAll(aIndex, aDataList);
         if (mAdapter != null) mAdapter.notifyItemRangeInserted(aIndex, aDataList.size());
@@ -121,7 +121,7 @@ public class TiAdapterListProxy<T> {
     }
 
     public boolean removeData(int aPosition) {
-        T lItem = CollectionUtil.getItem(mDataList, aPosition);
+        T lItem = CollectionUtil.item(mDataList, aPosition);
         if (lItem == null) return false;
         mDataList.remove(aPosition);
         if (mAdapter != null) mAdapter.notifyItemRemoved(aPosition);
@@ -141,11 +141,11 @@ public class TiAdapterListProxy<T> {
     }
 
     public T getDataItem(int aPosition) {
-        return CollectionUtil.getItem(mDataList, aPosition);
+        return CollectionUtil.item(mDataList, aPosition);
     }
 
     public int getItemCount() {
-        return CollectionUtil.getSize(mDataList);
+        return CollectionUtil.size(mDataList);
     }
 
     public List<T> getDataList() {
