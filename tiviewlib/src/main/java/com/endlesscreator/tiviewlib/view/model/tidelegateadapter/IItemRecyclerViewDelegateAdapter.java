@@ -1,5 +1,6 @@
 package com.endlesscreator.tiviewlib.view.model.tidelegateadapter;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -43,4 +44,7 @@ public interface IItemRecyclerViewDelegateAdapter<VH extends RecyclerView.ViewHo
 
     void notifyItemMoved(int fromPosition, int toPosition);
 
+    void onViewAttachedToWindow(VH holder, ItemDelegateAdapterInfo aAdapterInfo);
+
+    void onViewDetachedFromWindow(VH holder, ItemDelegateAdapterInfo aAdapterInfo);
 }

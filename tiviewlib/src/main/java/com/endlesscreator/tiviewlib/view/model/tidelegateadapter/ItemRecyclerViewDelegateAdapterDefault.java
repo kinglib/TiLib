@@ -73,4 +73,12 @@ public abstract class ItemRecyclerViewDelegateAdapterDefault<VH extends Recycler
     public void notifyItemMoved(int fromPosition, int toPosition) {
         delegateAdapter.notifyItemMoved(this, fromPosition, toPosition);
     }
+
+    @Override
+    public void onViewAttachedToWindow(VH holder, ItemDelegateAdapterInfo aAdapterInfo) {
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(VH holder, ItemDelegateAdapterInfo aAdapterInfo) {
+    }
 }

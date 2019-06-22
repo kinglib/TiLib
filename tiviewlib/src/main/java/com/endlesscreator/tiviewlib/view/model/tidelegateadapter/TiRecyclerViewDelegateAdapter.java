@@ -35,18 +35,6 @@ public class TiRecyclerViewDelegateAdapter extends RecyclerView.Adapter<Recycler
     }
 
     @Override
-    public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
-        super.onViewAttachedToWindow(holder);
-        if (holder instanceof IFullSpanDelegateViewHolder) {
-            ViewGroup.LayoutParams lItemParams = holder.itemView.getLayoutParams();
-            if (lItemParams instanceof StaggeredGridLayoutManager.LayoutParams) {
-                StaggeredGridLayoutManager.LayoutParams lParams = (StaggeredGridLayoutManager.LayoutParams) lItemParams;
-                lParams.setFullSpan(((IFullSpanDelegateViewHolder) holder).isFullSpan());
-            }
-        }
-    }
-
-    @Override
     public int getItemCount() {
         int lSize = 0;
         for (IItemRecyclerViewDelegateAdapter lAdapter : mAdapters) {
@@ -135,6 +123,43 @@ public class TiRecyclerViewDelegateAdapter extends RecyclerView.Adapter<Recycler
             lAdapterInfo.adapter.onBindViewHolder(holder, position - lAdapterInfo.adapterStartPosition, payloads);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        if (holder instanceof IFullSpanDelegateViewHolder) {
+            ViewGroup.LayoutParams lItemParams = holder.itemView.getLayoutParams();
+            if (lItemParams instanceof StaggeredGridLayoutManager.LayoutParams) {
+                StaggeredGridLayoutManager.LayoutParams lParams = (StaggeredGridLayoutManager.LayoutParams) lItemParams;
+                lParams.setFullSpan(((IFullSpanDelegateViewHolder) holder).isFullSpan());
+            }
+        }
+
+        int lAdapterPosition = holder.getAdapterPosition();
+        if (lAdapterPosition >= 0) { // TODO 数据被删除会返回-1， 不处理
+            ItemDelegateAdapterInfo lAdapterInfo = findAdapterInfo(lAdapterPosition);
+            try {
+                lAdapterInfo.adapter.onViewAttachedToWindow(holder, lAdapterInfo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+
+        int lAdapterPosition = holder.getAdapterPosition();
+        if (lAdapterPosition >= 0) { // TODO 数据被删除会返回-1， 不处理
+            ItemDelegateAdapterInfo lAdapterInfo = findAdapterInfo(lAdapterPosition);
+            try {
+                lAdapterInfo.adapter.onViewDetachedFromWindow(holder, lAdapterInfo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

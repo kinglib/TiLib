@@ -10,7 +10,7 @@ import com.endlesscreator.tiviewlib.view.model.tidelegateadapter.FullSpanDelegat
 
 public class ItemHolderA extends FullSpanDelegateViewHolderForChange<ItemBean> {
 
-    private TextView tv;
+    public TextView tv;
 
     public ItemHolderA(View itemView) {
         super(itemView);
