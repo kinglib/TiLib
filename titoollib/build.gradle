@@ -52,7 +52,7 @@ ext {
     artifact = 'titoollib'
     libraryDescription = '工具库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.18'
+    libraryVersion = '1.0.20'
 
     //发布者的信息
     developerId = 'ty'

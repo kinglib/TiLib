@@ -38,6 +38,7 @@ public class TiFitScrollView extends ScrollView {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public TiFitScrollView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init(attrs);
     }
 
     private void init(AttributeSet attrs) {

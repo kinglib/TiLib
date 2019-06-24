@@ -107,13 +107,35 @@ public class ScreenManager {
      * 获得状态栏的高度
      */
     public int getStatusBarHeight() {
-        if (mStatusBarHeight == 0) {
-            Resources lResources = TApp.getInstance().getResources();
-            int lResourceId = lResources.getIdentifier("status_bar_height", "dimen", "android");
-            if (lResourceId > 0) {
-                mStatusBarHeight = lResources.getDimensionPixelSize(lResourceId);
-            }
+        return getStatusBarHeight(null);
+    }
+
+    /**
+     * 获得状态栏的高度（自定义View预览使用）
+     */
+    public int getStatusBarHeight(Resources aResources) {
+        if (mStatusBarHeight <= 0) {
+            if (aResources == null) aResources = TApp.getInstance().getResources();
+            int lResourceId = aResources.getIdentifier("status_bar_height", "dimen", "android");
+            if (lResourceId > 0) mStatusBarHeight = aResources.getDimensionPixelSize(lResourceId);
         }
+        if (mStatusBarHeight <= 0) mStatusBarHeight = getStatusBarHeightSpare(aResources);
         return mStatusBarHeight;
     }
+
+    /**
+     * 获得状态栏的高度(备用)
+     */
+    private int getStatusBarHeightSpare(Resources aResources) {
+        try {
+            Class<?> lClass = Class.forName("com.android.internal.R$dimen");
+            int lHeight = Integer.parseInt(lClass.getField("status_bar_height").get(lClass.newInstance()).toString());
+            return aResources.getDimensionPixelSize(lHeight);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AlgorithmUtil.dp2px(20); // 默认当做20dp计算，这也是大多手机的状态栏高度
+    }
+
+
 }
