@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.endlesscreator.tilib.base.BaseActivity;
 import com.endlesscreator.tilib.module.bounce.TestBounceActivity;
+import com.endlesscreator.tilib.module.drag.TestDragActivity;
 import com.endlesscreator.tilib.module.etv.TestETVActivity;
 import com.endlesscreator.tilib.module.round.TestRoundActivity;
 import com.endlesscreator.tilib.module.vp.TestRecyclerViewActivity;
@@ -30,6 +31,9 @@ public class MainActivity extends BaseActivity {
                 return;
             case R.id.main_test_bounce:
                 toAct(TestBounceActivity.class);
+                return;
+            case R.id.main_test_drag:
+                toAct(TestDragActivity.class);
                 return;
         }
     }

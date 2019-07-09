@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5555"
+    tools:context=".module.drag.TestDragActivity">
+
+    <com.endlesscreator.tiviewlib.view.TiFitScrollView
+        android:id="@+id/drag_sv"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#2f2f" />
+
+            <com.endlesscreator.tilib.module.drag.view.ContentImageView
+                android:id="@+id/drag_content"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/test_img" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#2ff2" />
+
+        </LinearLayout>
+    </com.endlesscreator.tiviewlib.view.TiFitScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="#3F00"
+        android:onClick="click"
+        android:text="test" />
+
+    <com.endlesscreator.tilib.module.drag.view.ProxyImageView
+        android:id="@+id/drag_proxy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#22ff"
+        android:scaleType="fitCenter" />
+
+
+</RelativeLayout>
