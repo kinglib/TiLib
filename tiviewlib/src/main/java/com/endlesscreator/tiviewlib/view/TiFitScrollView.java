@@ -19,6 +19,8 @@ public class TiFitScrollView extends ScrollView {
 
     private float mMaxHeight = 0;
     private OnScrollChangedListener mScrollChangedListener;
+    private boolean mScrollEnable = true;
+
 
     public TiFitScrollView(Context context) {
         super(context);
@@ -39,6 +41,10 @@ public class TiFitScrollView extends ScrollView {
     public TiFitScrollView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(attrs);
+    }
+
+    public void setScrollEnable(boolean aScrollEnable) {
+        mScrollEnable = aScrollEnable;
     }
 
     private void init(AttributeSet attrs) {

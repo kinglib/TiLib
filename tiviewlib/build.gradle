@@ -62,7 +62,7 @@ ext {
     artifact = 'tiviewlib'
     libraryDescription = 'UI库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.47'
+    libraryVersion = '1.0.48'
 
     //发布者的信息
     developerId = 'ty'

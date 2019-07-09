@@ -13,6 +13,7 @@ import android.view.ViewParent;
 import com.endlesscreator.tibaselib.frame.SingleManager;
 import com.endlesscreator.titoollib.utils.AlgorithmUtil;
 import com.endlesscreator.tiviewlib.view.model.tirecyclerview.ScrollEnabledGridLayoutManager;
+import com.endlesscreator.tiviewlib.view.model.tirecyclerview.ScrollEnabledStaggeredGridLayoutManager;
 import com.endlesscreator.tiviewlib.view.model.tirecyclerview.TopSmoothScroller;
 
 import java.util.ArrayList;
@@ -135,6 +136,8 @@ public class TiRecyclerView extends RecyclerView implements Runnable {
                         checkCancelTouchView();
                         if (getLayoutManager() instanceof ScrollEnabledGridLayoutManager) {// 禁止上下滚动
                             ((ScrollEnabledGridLayoutManager) getLayoutManager()).setScrollEnabled(false);
+                        } else if (getLayoutManager() instanceof ScrollEnabledStaggeredGridLayoutManager) {// 禁止上下滚动
+                            ((ScrollEnabledStaggeredGridLayoutManager) getLayoutManager()).setScrollEnabled(false);
                         }
                     }
 
@@ -336,7 +339,7 @@ public class TiRecyclerView extends RecyclerView implements Runnable {
 
     /**
      * 设置左滑删除，需要点击事件请与 {@link #setOnItemChildViewClickListener} 或其重载方法配合使用, 或直接使用 {@link #setItemLeftMoveDeleteViewAndChildListener(OnItemChildViewClickListener, Integer, Integer)}
-     * 需要禁止滚动请与 {@link ScrollEnabledGridLayoutManager} 配合使用
+     * 需要禁止滚动请与 {@link ScrollEnabledGridLayoutManager} 或 {@link ScrollEnabledStaggeredGridLayoutManager} 配合使用
      */
     public void setItemLeftMoveDeleteView(Integer aItemLeftMoveViewID, Integer aItemRightDeleteViewID) {
         mItemLeftMoveViewID = aItemLeftMoveViewID;
@@ -358,6 +361,8 @@ public class TiRecyclerView extends RecyclerView implements Runnable {
         if (mItemLeftMoveViewID != null || mItemRightDeleteViewID != null) {
             if (getLayoutManager() instanceof ScrollEnabledGridLayoutManager) {
                 ((ScrollEnabledGridLayoutManager) getLayoutManager()).revertScrollEnabled();
+            } else if (getLayoutManager() instanceof ScrollEnabledStaggeredGridLayoutManager) {
+                ((ScrollEnabledStaggeredGridLayoutManager) getLayoutManager()).revertScrollEnabled();
             }
         }
     }
