@@ -36,4 +36,33 @@
     </com.endlesscreator.tiviewlib.view.TiRoundLayout>
 
 
+    <com.endlesscreator.tiviewlib.view.TiRoundLinear
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000"
+        android:orientation="vertical"
+        app:clip_bg="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:left_bottom_radius="200dp"
+        app:left_top_radius="400dp"
+        app:right_bottom_radius="100dp"
+        app:stroke_width="1dp">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="#0ff"
+            android:padding="15dp"
+            android:src="@mipmap/test_img" />
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="#f00" />
+
+    </com.endlesscreator.tiviewlib.view.TiRoundLinear>
+
+
 </android.support.constraint.ConstraintLayout>

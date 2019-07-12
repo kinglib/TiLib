@@ -15,6 +15,7 @@ import android.graphics.Region;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.endlesscreator.tiviewlib.R;
@@ -34,26 +35,26 @@ import com.endlesscreator.tiviewlib.view.model.tiround.TiRoundTool;
  * <p>
  * 注意：尽量避免使用裁剪背景，因为裁剪可能会出现边缘锯齿
  */
-public class TiRoundLayout extends RelativeLayout implements ITiRoundView {
+public class TiRoundLinear extends LinearLayout implements ITiRoundView {
 
     private TiRoundTool mTiRoundTool;
 
-    public TiRoundLayout(Context context) {
+    public TiRoundLinear(Context context) {
         this(context, null);
     }
 
-    public TiRoundLayout(Context context, AttributeSet attrs) {
+    public TiRoundLinear(Context context, AttributeSet attrs) {
         super(context, attrs);
         initAttrs(context, attrs);
     }
 
-    public TiRoundLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TiRoundLinear(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttrs(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public TiRoundLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public TiRoundLinear(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initAttrs(context, attrs);
     }
@@ -62,16 +63,16 @@ public class TiRoundLayout extends RelativeLayout implements ITiRoundView {
     public void initAttrs(Context context, AttributeSet attrs) {
         mTiRoundTool = new TiRoundTool(this);
 
-        TypedArray lTypedArray = context.obtainStyledAttributes(attrs, R.styleable.TiRoundLayout);
-        int lStrokeColor = lTypedArray.getColor(R.styleable.TiRoundLayout_stroke_color, Color.TRANSPARENT);
-        int lStrokeWidth = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_stroke_width, 0);
-        boolean lClipBackground = lTypedArray.getBoolean(R.styleable.TiRoundLayout_clip_bg, false);
-        int lRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_radius, 0);
+        TypedArray lTypedArray = context.obtainStyledAttributes(attrs, R.styleable.TiRoundLinear);
+        int lStrokeColor = lTypedArray.getColor(R.styleable.TiRoundLinear_stroke_color, Color.TRANSPARENT);
+        int lStrokeWidth = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLinear_stroke_width, 0);
+        boolean lClipBackground = lTypedArray.getBoolean(R.styleable.TiRoundLinear_clip_bg, false);
+        int lRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLinear_radius, 0);
 
-        int lLeftTopRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_left_top_radius, lRadius);
-        int lRightTopRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_right_top_radius, lRadius);
-        int lRightBottomRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_right_bottom_radius, lRadius);
-        int lLeftBottomRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLayout_left_bottom_radius, lRadius);
+        int lLeftTopRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLinear_left_top_radius, lRadius);
+        int lRightTopRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLinear_right_top_radius, lRadius);
+        int lRightBottomRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLinear_right_bottom_radius, lRadius);
+        int lLeftBottomRadius = lTypedArray.getDimensionPixelSize(R.styleable.TiRoundLinear_left_bottom_radius, lRadius);
         lTypedArray.recycle();
 
         mTiRoundTool.initAttrs(this, lStrokeColor, lStrokeWidth, lClipBackground, lLeftTopRadius, lRightTopRadius, lRightBottomRadius, lLeftBottomRadius);
