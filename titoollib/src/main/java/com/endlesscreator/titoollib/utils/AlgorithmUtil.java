@@ -100,6 +100,11 @@ public class AlgorithmUtil {
         return null;
     }
 
+    public static long toLong(Object aNum, long aDefaultValue) {
+        Long lResult = toLong(aNum);
+        return lResult == null ? aDefaultValue : lResult;
+    }
+
     public static Integer toInt(Object aNum) {
         String aStrNum = Util.toString(aNum);
         if (!TextUtils.isEmpty(aStrNum)) {
@@ -110,5 +115,10 @@ public class AlgorithmUtil {
             }
         }
         return null;
+    }
+
+    public static int toInt(Object aNum, int aDefaultValue) {
+        Integer lResult = toInt(aNum);
+        return lResult == null ? aDefaultValue : lResult;
     }
 }
