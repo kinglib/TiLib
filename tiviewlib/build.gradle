@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -33,8 +34,8 @@ dependencies {
         exclude group: 'com.android.support' // 和 appcompat-v7、recyclerview-v7版本冲突，去除掉包内的
     }
 
-//    // 推出Activity（侧滑、下拉）
-//    compileOnly 'com.r0adkll:slidableactivity:2.0.6'
+    // 支持Kotlin（用到kotlin的class时需要相应的引入）
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
     // 基础依赖基础库和工具库
 //    compileOnly 'com.endlesscreator.tibaselib:tibaselib:1.0.3'
@@ -62,7 +63,7 @@ ext {
     artifact = 'tiviewlib'
     libraryDescription = 'UI库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.49'
+    libraryVersion = '1.0.50'
 
     //发布者的信息
     developerId = 'ty'

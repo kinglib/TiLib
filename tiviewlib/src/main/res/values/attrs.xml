@@ -36,7 +36,7 @@
         <attr name="stroke_width" />
         <attr name="stroke_color" />
 
-        <attr name="clip_bg" /> <!-- 切割背景会有锯齿，可考虑使用签到布局解决 -->
+        <attr name="clip_bg" /> <!-- 切割背景会有锯齿，可考虑使用嵌套布局或XML(shape-solid&corners-radius)解决 -->
     </declare-styleable>
 
     <declare-styleable name="TiRoundLinear">
@@ -49,7 +49,7 @@
         <attr name="stroke_width" />
         <attr name="stroke_color" />
 
-        <attr name="clip_bg" /> <!-- 切割背景会有锯齿，可考虑使用签到布局解决 -->
+        <attr name="clip_bg" /> <!-- 切割背景会有锯齿，可考虑使用嵌套布局或XML(shape-solid&corners-radius)解决 -->
     </declare-styleable>
 
     <declare-styleable name="TiRoundFrame">
