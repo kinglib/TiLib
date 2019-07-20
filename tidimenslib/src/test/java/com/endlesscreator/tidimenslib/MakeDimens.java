@@ -64,9 +64,21 @@ public class MakeDimens {
         lBufferedWriter.write("    <!-- 详细规则可见：values-" + (int) REFERENCE + "x" + (int) REFERENCE + " 文件夹 -->");
         lBufferedWriter.write("    <dimen name=\"sw\">" + (int) OUT_W + "px</dimen>\n");
 
-        if (useDP) OUT_W = 375;// 按375dp计算
+        /*
+         * 需要使用DP的按w=411.4dp计算
+         * 设备	分辨率	DPI	宽(px)	宽(dp)
+         * HTC Tatoo	240x320	120 (ldpi)	240	320
+         * LG Optimus	320x480	160 (mdpi)	320	320
+         * Nexus one/s	480x800	240 (hdpi)	480	320
+         * Galaxy Nexus	720x1280	320 (xhdpi)	720	360
+         * Nexus 5	1080x1920	480 (xxhdpi)	1080	360
+         * Nexus 5x	1080x1920	420	1080	≈411.4
+         * Nexus 6/6p	1440x2560	560	1440	≈411.4
+         */
+        if (useDP) OUT_W = 411.4;
+
         for (int i = -64; i <= 1025; i++) {
-            float result = retentionAccuracy((i * OUT_W / REFERENCE), 1, BigDecimal.ROUND_DOWN);
+            float result = retentionAccuracy((i * OUT_W / REFERENCE), useDP ? 2 : 1, BigDecimal.ROUND_HALF_UP);
             if (i < 0)
                 lBufferedWriter.write("    <dimen name=\"swf" + Math.abs(i) + "\">" + result + lUnit + "</dimen>");
 //                lBufferedWriter.write("    <dimen name=\"sw" + (int) REFERENCE + "_f" + Math.abs(i) + "\">" + result + lUnit + "</dimen>");
@@ -119,15 +131,15 @@ public class MakeDimens {
 
     public static void main(String[] args) {
         double[] OUT_W_ARR = {
-                0
-                , 240 , 320, 360, 375, 410, 480, 540, 600, 640, 720, 750,
+                0,
+                240 , 320, 360, 375, 410, 480, 540, 600, 640, 720, 750,
                 768, 800, 1080, 1200, 1440, 1536, 1600, 1800, 1920, 2000, 2160,
                 2161
         };
 
-        for (int i = 0, j =OUT_W_ARR.length; i < j; i++) {
+        for (int i = 0, j = OUT_W_ARR.length; i < j; i++) {
             try {
-                make(OUT_W_ARR[i], i == j-1); // 最后一个也是用DP
+                MakeDimens.make(OUT_W_ARR[i], i == j - 1); // 最后一个也是用DP
             } catch (Exception e) {
                 e.printStackTrace();
             }
