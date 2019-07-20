@@ -33,7 +33,7 @@ ext {
     artifact = 'tidimenslib'
     libraryDescription = '基础库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     //发布者的信息
     developerId = 'ty'
