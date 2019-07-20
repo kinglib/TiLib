@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+ext {
+    //项目地址
+    siteUrl = 'https://github.com/kinglib/TiLib'
+    //项目下载地址
+    gitUrl = 'https://github.com/kinglib/TiLib.git'
+
+    //要发布的仓库，需要在jCenter中创建
+    bintrayRepo = 'kinglib'
+    //在maven仓库中创建的工程的名字
+    bintrayName = 'tidimenslib'
+
+    //要发布到的group的标识，使用module包名即可
+    publishedGroupId = 'com.endlesscreator.tidimenslib'
+    //libraryName, artifact, moduleName 必须保持一致
+    libraryName = 'tidimenslib'
+    //artifactId 要发布的工程的标识
+    artifact = 'tidimenslib'
+    libraryDescription = '基础库'//项目描述
+    //要发布的版本号
+    libraryVersion = '1.0.0'
+
+    //发布者的信息
+    developerId = 'ty'
+    developerName = 'ty'
+    developerEmail = 'wty10001@gmail.com'
+
+    //许可信息，不用修改
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: '../upload.gradle'

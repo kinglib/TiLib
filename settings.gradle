@@ -1,1 +1,1 @@
-include ':app', ':tibaselib', ':tiviewlib', ':titoollib'
+include ':app', ':tibaselib', ':tiviewlib', ':titoollib', ':tidimenslib'
