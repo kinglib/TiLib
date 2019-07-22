@@ -1,6 +1,7 @@
 package com.endlesscreator.titoollib.utils;
 
 import android.os.Environment;
+import android.text.TextUtils;
 
 
 import com.endlesscreator.tibaselib.frame.TApp;
@@ -68,4 +69,10 @@ public class FileUtil {
         return aUrl.substring(lStartIndex, lEndIndex);
     }
 
+    // 获取文件后缀名
+    public static String getFileSuffixName(String aPath) {
+        if (TextUtils.isEmpty(aPath)) return "";
+        int lStartIndex = aPath.lastIndexOf(".");
+        return lStartIndex < 0 ? "" : aPath.substring(lStartIndex);
+    }
 }
