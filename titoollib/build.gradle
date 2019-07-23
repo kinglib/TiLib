@@ -20,10 +20,24 @@ dependencies {
     compileOnly fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly 'com.android.support:appcompat-v7:28.0.0'
 
-    // 图片加载框架
+    // picasso 图片加载框架
     compileOnly 'com.squareup.picasso:picasso:2.5.2'
     // Json数据解析
     compileOnly 'com.alibaba:fastjson:1.2.47'
+
+    // fresco 图片加载框架
+    compileOnly 'com.facebook.fresco:fresco:1.13.0'
+//    // 在 API < 14 上的机器支持 WebP 时，需要添加
+//    compileOnly 'com.facebook.fresco:animated-base-support:1.13.0'
+//    compileOnly ('com.facebook.fresco:animated-base-support:1.13.0') {
+//        exclude group: 'com.android.support', module: 'support-v4' // 版本冲突，去除框架中的V4包
+//    }
+    // 支持 GIF 动图，需要添加
+    compileOnly 'com.facebook.fresco:animated-gif:1.13.0'
+    // 支持 WebP，需要添加
+    compileOnly 'com.facebook.fresco:webpsupport:1.13.0' // WebP 静态图
+    compileOnly 'com.facebook.fresco:animated-webp:1.13.0' // WebP 动图
+
 
     // 支持Kotlin（用到kotlin的class时需要相应的引入）
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
@@ -52,7 +66,7 @@ ext {
     artifact = 'titoollib'
     libraryDescription = '工具库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.24'
+    libraryVersion = '1.0.29'
 
     //发布者的信息
     developerId = 'ty'

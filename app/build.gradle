@@ -48,6 +48,17 @@ dependencies {
 //    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
+
+    // fresco
+    implementation 'com.facebook.fresco:fresco:1.13.0'
+    // 支持 GIF 动图，需要添加
+    implementation 'com.facebook.fresco:animated-gif:1.13.0'
+    // 支持 WebP，需要添加
+    implementation 'com.facebook.fresco:webpsupport:1.13.0' // WebP 静态图
+    implementation 'com.facebook.fresco:animated-webp:1.13.0' // WebP 动图
+
+
+
     // 支持Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 }
