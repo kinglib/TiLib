@@ -1,12 +1,18 @@
 package com.endlesscreator.titoollib.utils;
 
+import android.graphics.Bitmap;
 import android.os.Environment;
 import android.text.TextUtils;
 
 
 import com.endlesscreator.tibaselib.frame.TApp;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Random;
 
 public class FileUtil {
     private static final String TAG = FileUtil.class.getName();
@@ -75,4 +81,43 @@ public class FileUtil {
         int lStartIndex = aPath.lastIndexOf(".");
         return lStartIndex < 0 ? "" : aPath.substring(lStartIndex);
     }
+
+    public static boolean saveBitmapToFile(Bitmap aBitmap, File aFile) {
+        return saveBitmapToFile(aBitmap, aFile, null);
+    }
+
+    public static boolean saveBitmapToFile(Bitmap aBitmap, File aFile, Bitmap.CompressFormat aType) {
+        if (aBitmap != null && !aBitmap.isRecycled()) {
+            BufferedOutputStream bos = null;
+            try {
+                bos = new BufferedOutputStream(new FileOutputStream(aFile));
+                Bitmap.CompressFormat lType = aType == null ? Bitmap.CompressFormat.JPEG : aType;
+                aBitmap.compress(lType, 100, bos);
+                bos.flush();
+                bos.close();
+                return true;
+            } catch (Exception e) {
+                LogUtil.e(TAG, e);
+            } finally {
+                if (bos != null) {
+                    try {
+                        bos.close();
+                    } catch (Exception e) {
+                        LogUtil.e(TAG, e);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static String makeRandomFileName(@NotNull File aBaseFile) {
+        return EncodeUtil.encodeMD5(
+                SystemUtil.getOnlyFlag() +
+                        "-" + aBaseFile +
+                        "-" + System.currentTimeMillis() +
+                        "-" + new Random().nextInt()) +
+                getFileSuffixName(aBaseFile.getName());
+    }
+
 }
