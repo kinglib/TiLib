@@ -1,6 +1,7 @@
 package com.endlesscreator.titoollib.utils;
 
 import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.os.Environment;
 import android.text.TextUtils;
 
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Random;
 
 public class FileUtil {
@@ -112,12 +114,84 @@ public class FileUtil {
     }
 
     public static String makeRandomFileName(@NotNull File aBaseFile) {
+        return makeRandomFileName(aBaseFile.toString());
+    }
+
+    public static String makeRandomFileName(@NotNull String aBasePath) {
         return EncodeUtil.encodeMD5(
                 SystemUtil.getOnlyFlag() +
-                        "-" + aBaseFile +
+                        "-" + aBasePath +
                         "-" + System.currentTimeMillis() +
                         "-" + new Random().nextInt()) +
-                getFileSuffixName(aBaseFile.getName());
+                getFileSuffixName(aBasePath);
     }
+
+    /**
+     * 将InputStream写入本地文件
+     *
+     * @param aDestinationPath 写入本地目录
+     * @param aInput           输入流
+     */
+    public static boolean writeStreamToLocalPath(String aDestinationPath, InputStream aInput, boolean aCloseInput) {
+        if (!TextUtils.isEmpty(aDestinationPath) && aInput != null) {
+            FileOutputStream lFOS = null;
+            try {
+                int lIndex;
+                byte[] lBytes = new byte[1024];
+                lFOS = new FileOutputStream(aDestinationPath);
+                while ((lIndex = aInput.read(lBytes)) != -1) {
+                    lFOS.write(lBytes, 0, lIndex);
+                    lFOS.flush();
+                }
+                lFOS.close();
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (lFOS != null) try {
+                    lFOS.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (aCloseInput) try {
+                    aInput.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 获取本地视频时长，返回毫秒值
+     */
+    public static long getLocalVideoDuration(String aVideoPath) {
+        if (!TextUtils.isEmpty(aVideoPath)) try {
+            MediaMetadataRetriever lMMR = new MediaMetadataRetriever();
+            lMMR.setDataSource(aVideoPath);
+            Long aLong = AlgorithmUtil.toLong(lMMR.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            if (aLong != null) return aLong;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+//    /**
+//     * 返回第一帧
+//     */
+//    public static Bitmap getLocalVideoFirstFrame(String aVideoPath) {
+//        try {
+//            MediaMetadataRetriever lMMR = new MediaMetadataRetriever();
+//            lMMR.setDataSource(aVideoPath);
+//            //mediaMetadataRetriever.getFrameAtTime((start1 * 1000 + 1L), MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
+//            return lMMR.getFrameAtTime();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+
 
 }
