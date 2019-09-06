@@ -34,6 +34,7 @@ import java.util.List;
  * 修改背景支持方式
  */
 public class TiBounceView extends RelativeLayout {
+    private long mMackTimeMillis;
 
     // 动画类型
     public enum Style {
@@ -136,9 +137,17 @@ public class TiBounceView extends RelativeLayout {
         canvas.restore();
     }
 
+
     public void startAnim() {
         if (windowBlur) { // 如果需要截取当前背景并模糊
-            setBounceBgDrawable(new BitmapDrawable(getResources(), blur()));
+            long lTimeMillis = System.currentTimeMillis();
+            if (lTimeMillis - mMackTimeMillis > 1000) { // 点击过快不重新生成模糊图
+                Bitmap lBlurBitmap = blur();
+                if (lBlurBitmap != null) mMackTimeMillis = lTimeMillis;
+                setBounceBgDrawable(new BitmapDrawable(getResources(), lBlurBitmap));
+            } else if(mMackTimeMillis > 0) { // （非首次）连续点击过快不重新生成模糊图
+                mMackTimeMillis = lTimeMillis;
+            }
         }
         setVisibility(VISIBLE);
         postDelayed(new Runnable() {
@@ -318,7 +327,7 @@ public class TiBounceView extends RelativeLayout {
         view.buildDrawingCache(true);
         Bitmap mBitmap = view.getDrawingCache();
 
-        float scaleFactor = 7;//图片缩放比例
+        float scaleFactor = 20;//图片缩放比例
         float radius = 20;//模糊程度
         int width = mBitmap.getWidth();
         int height = mBitmap.getHeight();
@@ -336,7 +345,6 @@ public class TiBounceView extends RelativeLayout {
         view.setDrawingCacheEnabled(false);
         view.destroyDrawingCache();
         mBitmap.recycle();
-        mBitmap = null;
         return overlay;
     }
 }
