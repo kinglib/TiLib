@@ -8,10 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.media.MediaCodecInfo;
+import android.media.MediaCodecList;
 import android.net.Uri;
 import android.os.Build;
 import android.os.StrictMode;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -146,7 +149,7 @@ public class SystemUtil {
 
     /**
      * @param slotId slotId为卡槽Id，值为 0、1
-     * 手机IMEI号（DeviceId） – 需要动态权限: android.permission.READ_PHONE_STATE {@link android.Manifest.permission#READ_PHONE_STATE}。
+     *               手机IMEI号（DeviceId） – 需要动态权限: android.permission.READ_PHONE_STATE {@link android.Manifest.permission#READ_PHONE_STATE}。
      */
     public static String getIMEI(int slotId) {
         if (slotId == 0 && !TextUtils.isEmpty(mIMEI0)) {
@@ -306,6 +309,48 @@ public class SystemUtil {
         }
         return false;
     }
+
+    /**
+     * 检测是否支持H265硬解码
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public static boolean isH265DecoderSupport() {
+        try {
+            int count = MediaCodecList.getCodecCount();
+            for (int i = 0; i < count; i++) {
+                MediaCodecInfo info = MediaCodecList.getCodecInfoAt(i);
+                String name = info.getName();
+                if (name.contains("decoder") && name.contains("hevc")) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 检测是否支持H265硬编码
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public static boolean isH265EncoderSupport() {
+        try {
+            int count = MediaCodecList.getCodecCount();
+            for (int i = 0; i < count; i++) {
+                MediaCodecInfo info = MediaCodecList.getCodecInfoAt(i);
+                String name = info.getName();
+                boolean b = info.isEncoder();
+                if (b && name.contains("hevc")) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 //    //获取是否存在NavigationBar
 //    public static boolean hasNavigationBar() {
