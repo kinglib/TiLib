@@ -34,7 +34,7 @@ ext {
     artifact = 'tibaselib'
     libraryDescription = '基础库'//项目描述
     //要发布的版本号
-    libraryVersion = '1.0.3'
+    libraryVersion = '1.0.4'
 
     //发布者的信息
     developerId = 'ty'

@@ -27,6 +27,10 @@ public class CollectionUtil {
         return has(aList, aIndex) ? aList.get(aIndex) : null;
     }
 
+    public static <T, L extends List<T>> T last(L aList) {
+        return item(aList, size(aList) - 1);
+    }
+
     public static int size(Collection aCollection) {
         return aCollection != null ? aCollection.size() : 0;
     }

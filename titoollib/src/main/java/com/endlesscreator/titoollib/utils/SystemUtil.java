@@ -7,11 +7,14 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.media.MediaCodecInfo;
 import android.media.MediaCodecList;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
@@ -349,6 +352,78 @@ public class SystemUtil {
             e.printStackTrace();
         }
         return false;
+    }
+
+
+    public static <T> boolean putMetaValue(Bundle aMetaData, String aMetaKey, T aDefaultValue) {
+        if (aMetaData != null && aDefaultValue != null && !TextUtils.isEmpty(aMetaKey)) {
+            try {
+                if (aDefaultValue instanceof String) {
+                    aMetaData.putString(aMetaKey, (String) aDefaultValue);
+                    return true;
+                }
+                if (aDefaultValue instanceof Integer) {
+                    aMetaData.putInt(aMetaKey, (Integer) aDefaultValue);
+                    return true;
+                }
+                if (aDefaultValue instanceof Float) {
+                    aMetaData.putFloat(aMetaKey, (Float) aDefaultValue);
+                    return true;
+                }
+                if (aDefaultValue instanceof Boolean) {
+                    aMetaData.putBoolean(aMetaKey, (Boolean) aDefaultValue);
+                    return true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+
+    public static <T> T getMetaValue(Bundle aMetaData, String aMetaKey, T aDefaultValue) {
+        if (aMetaData != null && aDefaultValue != null && !TextUtils.isEmpty(aMetaKey)) {
+            try {
+                if (aDefaultValue instanceof String) return (T) aMetaData.getString(aMetaKey);
+
+                if (aDefaultValue instanceof Integer)
+                    return (T) (Integer) aMetaData.getInt(aMetaKey);
+
+                if (aDefaultValue instanceof Float)
+                    return (T) (Float) aMetaData.getFloat(aMetaKey);
+
+                if (aDefaultValue instanceof Boolean)
+                    return (T) (Boolean) aMetaData.getBoolean(aMetaKey);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return aDefaultValue;
+    }
+
+
+    public static Bundle getMetaData() {
+        return getMetaData(TApp.getInstance().getPackageName());
+    }
+
+    public static Bundle getMetaData(String aPackageName) {
+        ApplicationInfo lAppInfo = getAppInfo(aPackageName);
+        if (lAppInfo != null) return lAppInfo.metaData;
+
+        return null;
+    }
+
+    public static ApplicationInfo getAppInfo(String aPackageName) {
+        if (!TextUtils.isEmpty(aPackageName)) {
+            try {
+                return TApp.getInstance().getPackageManager().getApplicationInfo(aPackageName, PackageManager.GET_META_DATA);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 

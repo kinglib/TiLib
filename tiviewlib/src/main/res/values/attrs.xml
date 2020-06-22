@@ -39,6 +39,36 @@
         <attr name="clip_bg" /> <!-- 切割背景会有锯齿，可考虑使用嵌套布局或XML(shape-solid&corners-radius)解决 -->
     </declare-styleable>
 
+
+    <declare-styleable name="RCAttrs">
+        <attr name="radius" />
+        <attr name="left_top_radius" />
+        <attr name="right_top_radius" />
+        <attr name="right_bottom_radius" />
+        <attr name="left_bottom_radius" />
+
+        <attr name="stroke_width" />
+        <attr name="stroke_color" />
+
+        <attr name="clip_bg" /> <!-- 切割背景会有锯齿，可考虑使用嵌套布局或XML(shape-solid&corners-radius)解决 -->
+
+        <attr name="round_as_circle" format="boolean" />
+
+    </declare-styleable>
+
+    <declare-styleable name="TiRoundRL">
+        <attr name="radius" />
+        <attr name="left_top_radius" />
+        <attr name="right_top_radius" />
+        <attr name="right_bottom_radius" />
+        <attr name="left_bottom_radius" />
+
+        <attr name="stroke_width" />
+        <attr name="stroke_color" />
+
+        <attr name="clip_bg" /> <!-- 切割背景会有锯齿，可考虑使用嵌套布局或XML(shape-solid&corners-radius)解决 -->
+    </declare-styleable>
+
     <declare-styleable name="TiRoundLinear">
         <attr name="radius" />
         <attr name="left_top_radius" />
