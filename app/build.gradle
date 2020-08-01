@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+//    viewBinding {
+//        enabled = true
+//    }
 }
 
 
@@ -34,9 +38,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 
-//    implementation 'com.endlesscreator.tibaselib:tibaselib:1.0.3'
-//    implementation 'com.endlesscreator.titoollib:titoollib:1.0.5'
-//    implementation 'com.endlesscreator.tiviewlib:tiviewlib:1.0.13'
+//    implementation 'com.endlesscreator.tibaselib:tibaselib:1.0.4'
+//    implementation 'com.endlesscreator.titoollib:titoollib:1.0.36'
+//    implementation 'com.endlesscreator.tiviewlib:tiviewlib:1.0.51'
+//    implementation 'com.endlesscreator.tidimenslib:tidimenslib:1.0.2'
     implementation project(':tibaselib')
     implementation project(':titoollib')
     implementation project(':tiviewlib')
@@ -61,4 +66,5 @@ dependencies {
 
     // 支持Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
 }

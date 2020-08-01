@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
+import com.endlesscreator.titoollib.utils.CollectionUtil;
 import com.endlesscreator.titoollib.utils.LogUtil;
 import com.endlesscreator.tiviewlib.view.adapter.tool.TiAdapterListProxy;
 
@@ -48,6 +49,17 @@ public abstract class AbsRVAdapter<VH extends RecyclerView.ViewHolder, DI> exten
     }
 
     public void setDataList(List<DI> aDataList) {
+        if (CollectionUtil.empty(aDataList)) {
+            proxy.clearData();
+        } else {
+            proxy.setDataList(aDataList);
+        }
+    }
+
+    /**
+     * 该方法慎用
+     */
+    public void reAddDataList(List<DI> aDataList) {
         proxy.removeData();
         proxy.addDataList(aDataList);
     }
@@ -97,6 +109,10 @@ public abstract class AbsRVAdapter<VH extends RecyclerView.ViewHolder, DI> exten
 
     public DI item(int position) {
         return proxy.getDataItem(position);
+    }
+
+    public List<DI> dataList() {
+        return proxy.getDataList();
     }
 
     @Override

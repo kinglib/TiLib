@@ -56,6 +56,11 @@ public class TiAdapterListProxy<T> {
         mItemAdapter = aItemAdapter;
     }
 
+    public void removeAdapter() {
+        mAdapter = null;
+        mItemAdapter = null;
+    }
+
     public boolean setData(T aData) {
         if (aData == null) return false;
         mDataList.clear();
