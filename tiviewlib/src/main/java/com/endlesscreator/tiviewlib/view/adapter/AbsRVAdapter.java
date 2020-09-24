@@ -107,6 +107,10 @@ public abstract class AbsRVAdapter<VH extends RecyclerView.ViewHolder, DI> exten
         proxy.removeData();
     }
 
+    public void clear() {
+        proxy.clearData();
+    }
+
     public DI item(int position) {
         return proxy.getDataItem(position);
     }
